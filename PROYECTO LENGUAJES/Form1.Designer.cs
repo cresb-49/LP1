@@ -1,6 +1,6 @@
 ﻿namespace PROYECTO_LENGUAJES
 {
-    partial class Form1
+    partial class GTinsider
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,44 +28,151 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.CampoDeTexto = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.edicionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.compilarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.menuStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // CampoDeTexto
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(24, 31);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(750, 251);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.CampoDeTexto.AcceptsTab = true;
+            this.CampoDeTexto.Location = new System.Drawing.Point(24, 27);
+            this.CampoDeTexto.Name = "CampoDeTexto";
+            this.CampoDeTexto.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
+            this.CampoDeTexto.Size = new System.Drawing.Size(750, 257);
+            this.CampoDeTexto.TabIndex = 0;
+            this.CampoDeTexto.Text = "";
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(24, 302);
+            this.richTextBox2.Location = new System.Drawing.Point(24, 333);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(750, 96);
+            this.richTextBox2.Size = new System.Drawing.Size(750, 134);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.Text = "";
             // 
-            // Form1
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Transparent;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivosToolStripMenuItem,
+            this.edicionToolStripMenuItem,
+            this.compilarToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(803, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // archivosToolStripMenuItem
+            // 
+            this.archivosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nuevoToolStripMenuItem,
+            this.abrirToolStripMenuItem,
+            this.guardarToolStripMenuItem});
+            this.archivosToolStripMenuItem.Name = "archivosToolStripMenuItem";
+            this.archivosToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.archivosToolStripMenuItem.Text = "Archivos";
+            // 
+            // edicionToolStripMenuItem
+            // 
+            this.edicionToolStripMenuItem.Name = "edicionToolStripMenuItem";
+            this.edicionToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.edicionToolStripMenuItem.Text = "Edicion";
+            // 
+            // compilarToolStripMenuItem
+            // 
+            this.compilarToolStripMenuItem.Name = "compilarToolStripMenuItem";
+            this.compilarToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.compilarToolStripMenuItem.Text = "Compilar";
+            this.compilarToolStripMenuItem.Click += new System.EventHandler(this.compilarToolStripMenuItem_Click);
+            // 
+            // nuevoToolStripMenuItem
+            // 
+            this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoToolStripMenuItem.Text = "Nuevo";
+            // 
+            // abrirToolStripMenuItem
+            // 
+            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirToolStripMenuItem.Text = "Abrir";
+            // 
+            // guardarToolStripMenuItem
+            // 
+            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.guardarToolStripMenuItem.Text = "Guardar";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.CadetBlue;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Location = new System.Drawing.Point(24, 290);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(750, 37);
+            this.panel1.TabIndex = 3;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(99, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Ubicacion: Linea: 1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // GTinsider
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.CadetBlue;
+            this.ClientSize = new System.Drawing.Size(803, 495);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.richTextBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Controls.Add(this.CampoDeTexto);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.Name = "GTinsider";
+            this.Text = ".GTinsider";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox CampoDeTexto;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem archivosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem edicionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem compilarToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

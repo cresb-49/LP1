@@ -2,9 +2,9 @@ C:\Users\Carlos Pac\source\repos\PROYECTO LENGUAJES\PROYECTO LENGUAJES\bin\Debug
 C:\Users\Carlos Pac\source\repos\PROYECTO LENGUAJES\PROYECTO LENGUAJES\bin\Debug\PROYECTO LENGUAJES.exe
 C:\Users\Carlos Pac\source\repos\PROYECTO LENGUAJES\PROYECTO LENGUAJES\bin\Debug\PROYECTO LENGUAJES.pdb
 C:\Users\Carlos Pac\source\repos\PROYECTO LENGUAJES\PROYECTO LENGUAJES\obj\Debug\PROYECTO LENGUAJES.csprojAssemblyReference.cache
-C:\Users\Carlos Pac\source\repos\PROYECTO LENGUAJES\PROYECTO LENGUAJES\obj\Debug\PROYECTO_LENGUAJES.Form1.resources
 C:\Users\Carlos Pac\source\repos\PROYECTO LENGUAJES\PROYECTO LENGUAJES\obj\Debug\PROYECTO_LENGUAJES.Properties.Resources.resources
 C:\Users\Carlos Pac\source\repos\PROYECTO LENGUAJES\PROYECTO LENGUAJES\obj\Debug\PROYECTO LENGUAJES.csproj.GenerateResource.cache
 C:\Users\Carlos Pac\source\repos\PROYECTO LENGUAJES\PROYECTO LENGUAJES\obj\Debug\PROYECTO LENGUAJES.csproj.CoreCompileInputs.cache
 C:\Users\Carlos Pac\source\repos\PROYECTO LENGUAJES\PROYECTO LENGUAJES\obj\Debug\PROYECTO LENGUAJES.exe
 C:\Users\Carlos Pac\source\repos\PROYECTO LENGUAJES\PROYECTO LENGUAJES\obj\Debug\PROYECTO LENGUAJES.pdb
+C:\Users\Carlos Pac\source\repos\PROYECTO LENGUAJES\PROYECTO LENGUAJES\obj\Debug\PROYECTO_LENGUAJES.GTinsider.resources
