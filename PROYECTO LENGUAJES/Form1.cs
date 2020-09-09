@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using PROYECTO_LENGUAJES.ProcesamientoTexto;
+using PROYECTO_LENGUAJES.ManejoArchivos;
 namespace PROYECTO_LENGUAJES
 {
     public partial class GTinsider : Form
     {
         private SeparadorTexto clasificadorTexto = new SeparadorTexto();
+        private Archivos manejadorArchivos = new Archivos();
         public GTinsider()
         {
             InitializeComponent();
@@ -47,6 +50,20 @@ namespace PROYECTO_LENGUAJES
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "Abrir code source";
+            openFileDialog1.Filter = "Source code (*.gt)|*.gt";
+            openFileDialog1.ShowDialog();
+            String src = openFileDialog1.FileName;
+            String resultado = "";
+            if (File.Exists(src))
+            {
+                resultado = manejadorArchivos.LecturaArchivo(src);
+                CampoDeTexto.Text = resultado;
+            }
         }
     }
 }

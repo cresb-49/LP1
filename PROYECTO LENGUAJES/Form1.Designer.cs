@@ -32,13 +32,14 @@
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.edicionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.compilarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.edicionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.compilarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +85,25 @@
             this.archivosToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.archivosToolStripMenuItem.Text = "Archivos";
             // 
+            // nuevoToolStripMenuItem
+            // 
+            this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoToolStripMenuItem.Text = "Nuevo";
+            // 
+            // abrirToolStripMenuItem
+            // 
+            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirToolStripMenuItem.Text = "Abrir";
+            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
+            // 
+            // guardarToolStripMenuItem
+            // 
+            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.guardarToolStripMenuItem.Text = "Guardar";
+            // 
             // edicionToolStripMenuItem
             // 
             this.edicionToolStripMenuItem.Name = "edicionToolStripMenuItem";
@@ -96,24 +116,6 @@
             this.compilarToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.compilarToolStripMenuItem.Text = "Compilar";
             this.compilarToolStripMenuItem.Click += new System.EventHandler(this.compilarToolStripMenuItem_Click);
-            // 
-            // nuevoToolStripMenuItem
-            // 
-            this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.nuevoToolStripMenuItem.Text = "Nuevo";
-            // 
-            // abrirToolStripMenuItem
-            // 
-            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.abrirToolStripMenuItem.Text = "Abrir";
-            // 
-            // guardarToolStripMenuItem
-            // 
-            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.guardarToolStripMenuItem.Text = "Guardar";
             // 
             // panel1
             // 
@@ -134,6 +136,10 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Ubicacion: Linea: 1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // GTinsider
             // 
@@ -173,6 +179,7 @@
         private System.Windows.Forms.ToolStripMenuItem compilarToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
