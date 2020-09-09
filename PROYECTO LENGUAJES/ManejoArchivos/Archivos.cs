@@ -16,10 +16,11 @@ namespace PROYECTO_LENGUAJES.ManejoArchivos
         }
         public void EscrituraArchivo(String src, String texto)
         {
-            TextWriter escritura = new StreamWriter(src);
+            StreamWriter escritura = File.CreateText(src);
             try
             {
-                escritura.WriteLine(texto);
+                escritura.Write(texto);
+                escritura.Flush();
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message);
@@ -27,6 +28,19 @@ namespace PROYECTO_LENGUAJES.ManejoArchivos
             finally
             {
                 escritura.Close();
+            }
+        }
+        public void CrearArchivo(String src)
+        {   
+            try
+            {
+                StreamWriter crear = File.CreateText(src);
+                crear.Flush();
+                crear.Close();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
         public String LecturaArchivo(String src)

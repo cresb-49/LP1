@@ -10,19 +10,23 @@ using System.Windows.Forms;
 using System.IO;
 using PROYECTO_LENGUAJES.ProcesamientoTexto;
 using PROYECTO_LENGUAJES.ManejoArchivos;
+using System.Net.Configuration;
+
 namespace PROYECTO_LENGUAJES
 {
     public partial class GTinsider : Form
     {
         private SeparadorTexto clasificadorTexto = new SeparadorTexto();
         private Archivos manejadorArchivos = new Archivos();
+        private String CurrentFileSource="";
         public GTinsider()
         {
             InitializeComponent();
+            propiedadesGraficas();
         }
         private void propiedadesGraficas()
         {
-
+            CampoDeTexto.Enabled = false;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -58,11 +62,52 @@ namespace PROYECTO_LENGUAJES
             openFileDialog1.Filter = "Source code (*.gt)|*.gt";
             openFileDialog1.ShowDialog();
             String src = openFileDialog1.FileName;
+            this.CurrentFileSource = src;
             String resultado = "";
             if (File.Exists(src))
             {
+                CampoDeTexto.Enabled = true;
                 resultado = manejadorArchivos.LecturaArchivo(src);
                 CampoDeTexto.Text = resultado;
+            }
+        }
+
+        private void archivosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CurrentFileSource.Equals(""))
+            {
+                MessageBox.Show("No esta trabajado bajo algun archivo");
+            }
+            else
+            {
+                String txt = CampoDeTexto.Text;
+                manejadorArchivos.EscrituraArchivo(CurrentFileSource, txt);
+            }
+        }
+
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Title = "Guardar Source Code";
+            saveFileDialog1.Filter = "Source code (*.gt)|*.gt";
+            saveFileDialog1.FileName = "Sin titulo 1";
+            if(saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                String source = saveFileDialog1.FileName;
+                if (File.Exists(source))
+                {
+                    MessageBox.Show("Un archivo ya existe con este nombre");
+                }
+                else
+                {
+                    CampoDeTexto.Enabled = true;
+                    manejadorArchivos.CrearArchivo(source);
+                    this.CurrentFileSource = source;
+                }
             }
         }
     }
