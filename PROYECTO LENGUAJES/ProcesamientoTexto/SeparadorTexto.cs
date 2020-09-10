@@ -221,22 +221,62 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                     }
                     else
                     {
-                        inicio = i;
-                        fin = i + 1;
-                        String extraccion = extraerTexto(arreglo, inicio, fin);
-                        Console.WriteLine("aqui 4:" + extraccion + "---");
-                        //palabras.Add(extraccion);
-                        token.Add(new LOCATION_token(extraccion, numeroLinea));
-                        //apuntador1 = arreglo.Substring(fin+1, 1);
-                        if (apuntador1.Equals("\n"))
+                        if(apuntador1.Equals("/") && apuntador2.Equals("*"))
                         {
-                            inicio = i + 3;
+                            inicio = i;
+                            int ubicacionEspacio=i;
+                            //fin = i + 1;
+                            fin = arreglo.IndexOf("*/", i);
+                            if (fin < 0)
+                            {
+                                fin = legth;
+                            }
+
+                            do
+                            {
+                                ubicacionEspacio = arreglo.IndexOf("\n", ubicacionEspacio + 1);
+                                if (ubicacionEspacio < 0)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    numeroLinea++;
+                                }
+                            } while (ubicacionEspacio < fin);
+                            numeroLinea--;
+                            String extraccion = extraerTexto(arreglo, inicio, fin+1);
+                            Console.WriteLine("aqui 7:" + extraccion + "---");
+                            //palabras.Add(extraccion);
+                            //token.Add(new LOCATION_token(extraccion, numeroLinea));
+                            //inicio = fin + 1;
+                            //extraccion = extraerTexto(arreglo, inicio, fin-1);
+                            //Console.WriteLine("aqui 7: " + extraccion + "---");
+                            //palabras.Add(extraccion);
+                            token.Add(new LOCATION_token(extraccion, numeroLinea));
+
+                            i = fin +1;
+                            inicio = fin + 3;
                         }
                         else
                         {
-                            inicio = i + 2;
+                            inicio = i;
+                            fin = i + 1;
+                            String extraccion = extraerTexto(arreglo, inicio, fin);
+                            Console.WriteLine("aqui 4:" + extraccion + "---");
+                            //palabras.Add(extraccion);
+                            token.Add(new LOCATION_token(extraccion, numeroLinea));
+                            //apuntador1 = arreglo.Substring(fin+1, 1);
+                            if (apuntador1.Equals("\n"))
+                            {
+                                inicio = i + 3;
+                            }
+                            else
+                            {
+                                inicio = i + 2;
+                            }
+                            i = i + 1;
                         }
-                        i = i + 1;
                     }
                 }
                 else
