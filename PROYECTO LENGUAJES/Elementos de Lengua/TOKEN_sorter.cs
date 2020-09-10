@@ -18,7 +18,8 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
         private Aritemetics_Signs aritemetics_Signs = new Aritemetics_Signs();
         private RelationalOperators relationalOperators = new RelationalOperators();
         private List<ID_token> TOKEN_type = new List<ID_token>();
-
+        private LogicOperators logicOperators = new LogicOperators();
+        private GroupingSing groupingSing = new GroupingSing();
         public TOKEN_sorter()
         {
 
@@ -63,6 +64,22 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
                             if (relationalOperators.analizar(token.getCadena()))
                             {
                                 TOKEN_type.Add(new ID_token("RelationalOperator_TOKEN", token.getCadena(), token.getLineaUbicacion()));
+                            }
+                            if (logicOperators.analizar(token.getCadena()))
+                            {
+                                TOKEN_type.Add(new ID_token("LogicOperators_TOKEN", token.getCadena(), token.getLineaUbicacion()));
+                            }
+                            if (groupingSing.analizar(token.getCadena()))
+                            {
+                                TOKEN_type.Add(new ID_token("GroupingSing_TOKEN", token.getCadena(), token.getLineaUbicacion()));
+                            }
+                            if (token.getCadena().Equals("="))
+                            {
+                                TOKEN_type.Add(new ID_token("Asigment_TOKEN", token.getCadena(), token.getLineaUbicacion()));
+                            }
+                            if (token.getCadena().Equals(";"))
+                            {
+                                TOKEN_type.Add(new ID_token("Ending_TOKEN", token.getCadena(), token.getLineaUbicacion()));
                             }
                         }
                     }
