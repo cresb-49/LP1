@@ -8,24 +8,24 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
 {
     class ID_token
     {
-        private String nombre;
+        private String ID;
         private String tipo;
-        private String valor;
+        private int lineaUbicacion;
 
-        public ID_token(String nombre, String tipo, String valor)
+        public ID_token(String ID, String tipo, int ubicacion)
         {
-            this.nombre = nombre;
+            this.ID = ID;
             this.tipo = tipo;
-            this.valor = valor;
+            this.lineaUbicacion = ubicacion;
         }
 
         public String getNombre()
         {
-            return this.nombre;
+            return this.ID;
         }
         public void setNombre(String nombre)
         {
-            this.nombre = nombre;
+            this.ID = nombre;
         }
         public String getTipo()
         {
@@ -35,13 +35,13 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
         {
             this.tipo = tipo;
         }
-        public String getValor()
+        public int getUbicacion()
         {
-            return this.valor;
+            return this.lineaUbicacion;
         }
-        public void setValor(String valor)
+        public void setUbicacion(int ubicacion)
         {
-            this.valor = valor;
+            this.lineaUbicacion = ubicacion;
         }
     }
 }

@@ -43,6 +43,10 @@ namespace PROYECTO_LENGUAJES
 
             List<LOCATION_token> recuperacion = new List<LOCATION_token>();
             recuperacion = clasificadorTexto.abstraccionTexto(texto);
+
+
+
+
             foreach (LOCATION_token token in recuperacion)
             {
                 //Console.WriteLine(token);

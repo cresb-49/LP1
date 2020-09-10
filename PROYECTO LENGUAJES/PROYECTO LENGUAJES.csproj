@@ -46,8 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AFD\AFD_enteros.cs" />
+    <Compile Include="AFD\AFD_id_reference.cs" />
+    <Compile Include="AFD\Aritemetics_Signs.cs" />
+    <Compile Include="AFD\BooleanRefrence.cs" />
+    <Compile Include="AFD\RelationalOperators.cs" />
+    <Compile Include="AFD\VAR_Type.cs" />
+    <Compile Include="AFD\WORD_recerved.cs" />
+    <Compile Include="AFD\AFD_realNumber.cs" />
     <Compile Include="Elementos de Lengua\ID_token.cs" />
     <Compile Include="Elementos de Lengua\LOCATION_token.cs" />
+    <Compile Include="Elementos de Lengua\TOKEN_sorter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
