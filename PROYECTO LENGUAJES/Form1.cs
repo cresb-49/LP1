@@ -11,6 +11,7 @@ using System.IO;
 using PROYECTO_LENGUAJES.ProcesamientoTexto;
 using PROYECTO_LENGUAJES.ManejoArchivos;
 using System.Net.Configuration;
+using PROYECTO_LENGUAJES.Elementos_de_Lengua;
 
 namespace PROYECTO_LENGUAJES
 {
@@ -38,11 +39,15 @@ namespace PROYECTO_LENGUAJES
             Console.WriteLine("Se selecciono la opcion");
             String texto = CampoDeTexto.Text;
             Console.WriteLine(texto);
-            List<String> recuperacion = new List<String>();
+            //List<String> recuperacion = new List<String>();
+
+            List<LOCATION_token> recuperacion = new List<LOCATION_token>();
             recuperacion = clasificadorTexto.abstraccionTexto(texto);
-            foreach (string cadena in recuperacion)
+            foreach (LOCATION_token token in recuperacion)
             {
-                Console.WriteLine(cadena);
+                //Console.WriteLine(token);
+                Console.WriteLine("Token: "+token.getCadena()+" Ubicacion: "+token.getLineaUbicacion());
+                Console.WriteLine("-------------------------------------");
             }
         }
 
