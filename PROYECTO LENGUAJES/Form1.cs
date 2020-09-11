@@ -79,6 +79,14 @@ namespace PROYECTO_LENGUAJES
         {
             buttonExportar.Enabled = false;
             logText.Lines = null;
+            if (!CurrentFileSource.Equals(""))
+            {
+                if (MessageBox.Show("Desea guardar los cambios del documento", "Guardar cambios", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    guardarArchivo();
+                }
+            }
+            CampoDeTexto.Lines = null;
             openFileDialog1.Title = "Abrir code source";
             openFileDialog1.Filter = "Source code (*.gt)|*.gt";
             openFileDialog1.ShowDialog();
@@ -100,6 +108,10 @@ namespace PROYECTO_LENGUAJES
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            guardarArchivo();
+        }
+        private void guardarArchivo()
+        {
             if (CurrentFileSource.Equals(""))
             {
                 MessageBox.Show("No esta trabajado bajo algun archivo");
@@ -114,6 +126,16 @@ namespace PROYECTO_LENGUAJES
         {
             buttonExportar.Enabled = false;
             logText.Lines = null;
+
+            if (!CurrentFileSource.Equals(""))
+            {
+                if (MessageBox.Show("Desea guardar los cambios del documento", "Guardar cambios", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    guardarArchivo();
+                }
+            }
+            CampoDeTexto.Lines = null;
+
             saveFileDialog1.Title = "Guardar Source Code";
             saveFileDialog1.Filter = "Source code (*.gt)|*.gt";
             saveFileDialog1.FileName = "Sin titulo 1";
