@@ -11,7 +11,9 @@ using System.IO;
 using PROYECTO_LENGUAJES.ProcesamientoTexto;
 using PROYECTO_LENGUAJES.ManejoArchivos;
 using System.Net.Configuration;
+using PROYECTO_LENGUAJES.Colorear;
 using PROYECTO_LENGUAJES.Elementos_de_Lengua;
+using PROYECTO_LENGUAJES.AFD;
 
 namespace PROYECTO_LENGUAJES
 {
@@ -20,7 +22,9 @@ namespace PROYECTO_LENGUAJES
         private SeparadorTexto clasificadorTexto = new SeparadorTexto();
         private Archivos manejadorArchivos = new Archivos();
         private String CurrentFileSource="";
+        private ResaltarPalabras resaltarPalabras = new ResaltarPalabras();
         private int carcater;
+       
         public GTinsider()
         {
             InitializeComponent();
@@ -55,11 +59,11 @@ namespace PROYECTO_LENGUAJES
             int cont = 0;
             foreach (ID_token token in recuperacion2)
             {
-                lineas[cont] = "----------------------------------------------------------------------------------";
+                lineas[cont] = "-----------------------------------------------------------------------------------------------------------------------------";
                 cont++;
                 lineas[cont] = "Token type: " + token.getID()+" Linea ubicacion: "+token.getUbicacion() + "  Contenido: " + token.getTipo();
                 cont++;
-                lineas[cont] = "----------------------------------------------------------------------------------";
+                lineas[cont] = "-----------------------------------------------------------------------------------------------------------------------------";
                 cont++;
             }
             logText.Lines = lineas;
@@ -200,6 +204,43 @@ namespace PROYECTO_LENGUAJES
                     manejadorArchivos.ExportarLog(source,lineas);
                 }
             }
+        }
+
+        private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(CampoDeTexto.SelectionLength > 0)
+            {
+                CampoDeTexto.Copy();
+            }
+        }
+
+        private void pegarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.GetDataObject().GetDataPresent(DataFormats.Text) == true)
+            {
+                if (CampoDeTexto.SelectionLength > 0)
+                {
+                    if (MessageBox.Show("¿Quieres pegar sobre la selección actual? ", "Aviso", MessageBoxButtons.YesNo) == DialogResult.No)
+                    {
+                        CampoDeTexto.SelectionStart = CampoDeTexto.SelectionStart + CampoDeTexto.SelectionLength;
+                    }
+                }
+                CampoDeTexto.Paste();
+            }
+        }
+
+        private void cortarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CampoDeTexto.SelectedText != "")
+            {
+                CampoDeTexto.Cut();
+            }
+                
+        }
+
+        private void CampoDeTexto_TextChanged(object sender, EventArgs e)
+        {
+            resaltarPalabras.Resaltado(CampoDeTexto, "entero", Color.Red);
         }
     }
 }
