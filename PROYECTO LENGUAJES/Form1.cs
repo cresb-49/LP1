@@ -40,6 +40,7 @@ namespace PROYECTO_LENGUAJES
 
         private void compilarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            logText.Lines = null;
             Console.WriteLine("Se selecciono la opcion");
             String texto = CampoDeTexto.Text;
             Console.WriteLine(texto);
@@ -55,19 +56,19 @@ namespace PROYECTO_LENGUAJES
             List<ID_token> recuperacion2 = new List<ID_token>();
 
             recuperacion2 = identificaion.GetID_Tokens();
-
+            String[] lineas = new string[((recuperacion2.Count)*3)];
+            int cont = 0;
             foreach (ID_token token in recuperacion2)
             {
-                Console.WriteLine("Token type:-"+token.getID()+" Contenido:-"+token.getTipo());
-                Console.WriteLine("-------------------------------------");
+                lineas[cont] = "----------------------------------------------------------------------------------";
+                cont++;
+                lineas[cont] = "Token type: " + token.getID()+" Linea ubicacion: "+token.getUbicacion() + "  Contenido: " + token.getTipo();
+                cont++;
+                lineas[cont] = "----------------------------------------------------------------------------------";
+                cont++;
+                //Console.WriteLine("Token type: "+token.getID()+ "Contenido:-"+token.getTipo());
             }
-            /*
-            foreach (LOCATION_token token in recuperacion)
-            {
-                //Console.WriteLine(token);
-                Console.WriteLine("Token: "+token.getCadena()+" Ubicacion: "+token.getLineaUbicacion());
-                Console.WriteLine("-------------------------------------");
-            }*/
+            logText.Lines = lineas;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
