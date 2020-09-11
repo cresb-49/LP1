@@ -43,7 +43,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonExportar = new System.Windows.Forms.Button();
             this.logText = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -121,7 +121,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.buttonExportar);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(24, 290);
             this.panel1.Name = "panel1";
@@ -154,14 +154,15 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // button1
+            // buttonExportar
             // 
-            this.button1.Location = new System.Drawing.Point(672, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Exportar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonExportar.Location = new System.Drawing.Point(672, 6);
+            this.buttonExportar.Name = "buttonExportar";
+            this.buttonExportar.Size = new System.Drawing.Size(75, 23);
+            this.buttonExportar.TabIndex = 1;
+            this.buttonExportar.Text = "Exportar";
+            this.buttonExportar.UseVisualStyleBackColor = true;
+            this.buttonExportar.Click += new System.EventHandler(this.buttonExportar_Click);
             // 
             // logText
             // 
@@ -216,7 +217,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonExportar;
         private System.Windows.Forms.RichTextBox logText;
     }
 }

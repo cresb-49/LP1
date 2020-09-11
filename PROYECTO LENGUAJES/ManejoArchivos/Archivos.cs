@@ -61,6 +61,26 @@ namespace PROYECTO_LENGUAJES.ManejoArchivos
             }
             return archivoLeido;
         }
+        public void ExportarLog(String src, String[] lineas)
+        {
+            StreamWriter escritura = File.CreateText(src);
+            try
+            {
+                foreach (String linea in lineas)
+                {
+                    escritura.WriteLine(linea);
+                }
+                escritura.Flush();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                escritura.Close();
+            }
+        }
 
     }
 }
