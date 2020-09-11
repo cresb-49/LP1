@@ -9,12 +9,14 @@ namespace PROYECTO_LENGUAJES.AFD
     class AFD_character
     {
         private int state = 0;
+        private Boolean aceptacion = false;
         public AFD_character()
         {
 
         }
         public Boolean analizar(String cadena)
         {
+            aceptacion = false;
             if (!cadena.Equals(""))
             {
                 String caracter = "";
@@ -24,61 +26,66 @@ namespace PROYECTO_LENGUAJES.AFD
                     switch (state)
                     {
                         case 0:
-                            if (State_0(caracter) == false)
-                            {
-                                return false;
-                            }
+                            State_0(caracter);
                             break;
                         case 1:
-                            if (State_1(caracter) == false)
-                            {
-                                return false;
-                            }
+                            State_1(caracter);
                             break;
                         default:
-                            return false;
+                            state = 0;
+                            return aceptacion;
                     }
                 }
-                return true;
+                state = 0;
+                return aceptacion;
             }
             else
             {
-                return false;
+                state = 0;
+                return aceptacion;
             }
         }
-        private Boolean State_0(String caracter)
+        private void State_0(String caracter)
         {
-            int acii = System.Convert.ToInt32(caracter);
+            int acii = System.Convert.ToInt32(Convert.ToChar(caracter));
+            if ((acii >= 65 && acii <= 90))
+            {
+                //Letras mayuscula
+                this.state = 1;
+                aceptacion = true;
+            }else
+            if (((acii >= 97 && acii <= 122)))
+            {
+                //Letras minusculas
+                this.state = 1;
+                aceptacion = true;
+            }
+            else
+            {
+                this.state = 1;
+                aceptacion = false;
+            }
+        }
+        private void State_1(String caracter)
+        {
+            int acii = System.Convert.ToInt32(Convert.ToChar(caracter));
             //Letras mayuscula
             if ((acii >= 65 && acii <= 90))
             {
                 this.state = 1;
-                return true;
+                aceptacion = false;
             }
             //Letras minusculas
             if (((acii >= 97 && acii <= 122)))
             {
                 this.state = 1;
-                return true;
+                aceptacion = false;
             }
-            return false;
-        }
-        private Boolean State_1(String caracter)
-        {
-            int acii = System.Convert.ToInt32(caracter);
-            //Letras mayuscula
-            if ((acii >= 65 && acii <= 90))
             {
-                this.state = 1;
-                return false;
+                this.state = 0;
+                aceptacion = false;
             }
-            //Letras minusculas
-            if (((acii >= 97 && acii <= 122)))
-            {
-                this.state = 1;
-                return false;
-            }
-            return false;
+            
         }
     }
 }

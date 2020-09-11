@@ -19,11 +19,11 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
             this.lineaUbicacion = ubicacion;
         }
 
-        public String getNombre()
+        public String getID()
         {
             return this.ID;
         }
-        public void setNombre(String nombre)
+        public void setID(String nombre)
         {
             this.ID = nombre;
         }

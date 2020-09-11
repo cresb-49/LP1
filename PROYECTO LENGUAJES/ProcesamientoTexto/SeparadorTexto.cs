@@ -227,11 +227,12 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                             int ubicacionEspacio=i;
                             //fin = i + 1;
                             fin = arreglo.IndexOf("*/", i);
+                            //Console.WriteLine("Error: " + fin);
                             if (fin < 0)
                             {
                                 fin = legth;
                             }
-
+                            //Console.WriteLine("Error: " + fin);
                             do
                             {
                                 ubicacionEspacio = arreglo.IndexOf("\n", ubicacionEspacio + 1);
@@ -245,7 +246,17 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                                 }
                             } while (ubicacionEspacio < fin);
                             numeroLinea--;
-                            String extraccion = extraerTexto(arreglo, inicio, fin+1);
+
+                            String extraccion;
+                            if (fin == legth)
+                            {
+                                extraccion = extraerTexto(arreglo, inicio, fin-1);
+                            }
+                            else
+                            {
+                                extraccion = extraerTexto(arreglo, inicio, fin + 1);
+                            }
+                            
                             Console.WriteLine("aqui 7:" + extraccion + "---");
                             //palabras.Add(extraccion);
                             //token.Add(new LOCATION_token(extraccion, numeroLinea));

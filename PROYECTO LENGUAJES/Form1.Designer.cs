@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.CampoDeTexto = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -41,17 +42,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // CampoDeTexto
             // 
             this.CampoDeTexto.AcceptsTab = true;
-            this.CampoDeTexto.Location = new System.Drawing.Point(24, 27);
+            this.CampoDeTexto.Location = new System.Drawing.Point(53, 27);
             this.CampoDeTexto.Name = "CampoDeTexto";
             this.CampoDeTexto.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-            this.CampoDeTexto.Size = new System.Drawing.Size(750, 257);
+            this.CampoDeTexto.Size = new System.Drawing.Size(721, 257);
             this.CampoDeTexto.TabIndex = 0;
             this.CampoDeTexto.Text = "";
             // 
@@ -141,6 +145,21 @@
             this.label1.Text = "Ubicacion: Linea: 1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.CadetBlue;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(24, 27);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(23, 257);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // GTinsider
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -148,6 +167,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(803, 495);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.CampoDeTexto);
@@ -161,6 +181,7 @@
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,6 +202,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

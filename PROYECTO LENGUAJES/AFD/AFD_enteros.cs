@@ -31,28 +31,22 @@ namespace PROYECTO_LENGUAJES.AFD
                             }
                             break;
                         default:
+                            state = 0;
                             return false;
                     }
                 }
+                state = 0;
                 return true;
             }
             else
             {
-               return false;
+                state = 0;
+                return false;
             }
         }
         private Boolean State_0(String caracter)
         {
-            int acii = System.Convert.ToInt32(caracter);
-            if ((acii >= 48 && acii <= 57))
-            {
-                return true;
-            }
-            return false;
-        }
-        private Boolean numeros(char caracter)
-        {
-            int acii = System.Convert.ToInt32(caracter);
+            int acii = System.Convert.ToInt32(Convert.ToChar(caracter));
             if ((acii >= 48 && acii <= 57))
             {
                 return true;

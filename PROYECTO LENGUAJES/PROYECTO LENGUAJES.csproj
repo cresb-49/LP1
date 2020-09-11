@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AFD\AFD_cadena.cs" />
     <Compile Include="AFD\AFD_character.cs" />
+    <Compile Include="AFD\AFD_Comentario.cs" />
     <Compile Include="AFD\AFD_enteros.cs" />
     <Compile Include="AFD\AFD_id_reference.cs" />
     <Compile Include="AFD\Aritemetics_Signs.cs" />

@@ -42,19 +42,22 @@ namespace PROYECTO_LENGUAJES.AFD
                             }
                             break;
                         default:
+                            state = 0;
                             return false;
                     }
                 }
+                state = 0;
                 return true;
             }
             else
             {
+                state = 0;
                 return false;
             }
         }
         private Boolean State_0(String caracter)
         {
-            int acii = System.Convert.ToInt32(caracter);
+            int acii = System.Convert.ToInt32(Convert.ToChar(caracter));
             if ((acii >= 48 && acii <= 57))
             {
                 this.state = 1;
@@ -64,7 +67,7 @@ namespace PROYECTO_LENGUAJES.AFD
         }
         private Boolean State_1(String caracter)
         {
-            int acii = System.Convert.ToInt32(caracter);
+            int acii = System.Convert.ToInt32(Convert.ToChar(caracter));
             if ((acii >= 48 && acii <= 57))
             {
                 this.state = 1;
