@@ -20,7 +20,7 @@ namespace PROYECTO_LENGUAJES.Colorear
             Color color;
             int pos = campoDeTexto.SelectionStart;
             campoDeTexto.SelectAll();
-            campoDeTexto.SelectionColor = Color.Black;
+            //campoDeTexto.SelectionColor = Color.Black;
             foreach (ID_token cadena in tokens)
             {
                 campoDeTexto.SelectionStart = cadena.getInicioCadena();
