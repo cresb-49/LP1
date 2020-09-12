@@ -35,7 +35,6 @@ namespace PROYECTO_LENGUAJES
         {
             CampoDeTexto.Enabled = false;
             buttonExportar.Enabled = false;
-
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -48,7 +47,7 @@ namespace PROYECTO_LENGUAJES
             buttonExportar.Enabled = true;
             logText.Lines = null;
             String texto = CampoDeTexto.Text;
-            Console.WriteLine(texto);
+            //Console.WriteLine(texto);
             List<LOCATION_token> recuperacion = new List<LOCATION_token>();
             recuperacion = clasificadorTexto.abstraccionTexto(texto);
             TOKEN_sorter identificaion = new TOKEN_sorter();
@@ -61,7 +60,7 @@ namespace PROYECTO_LENGUAJES
             {
                 lineas[cont] = "-----------------------------------------------------------------------------------------------------------------------------";
                 cont++;
-                lineas[cont] = "Token type: " + token.getID()+" Linea ubicacion: "+token.getUbicacion() + "  Contenido: " + token.getTipo();
+                lineas[cont] = "Token type: " + token.getID()+" Linea ubicacion: "+token.getUbicacion() + "  Contenido: " + token.getContenido();
                 cont++;
                 lineas[cont] = "-----------------------------------------------------------------------------------------------------------------------------";
                 cont++;
@@ -240,7 +239,20 @@ namespace PROYECTO_LENGUAJES
 
         private void CampoDeTexto_TextChanged(object sender, EventArgs e)
         {
-            resaltarPalabras.Resaltado(CampoDeTexto, "entero", Color.Red);
+            
+            String texto = CampoDeTexto.Text;
+            List<LOCATION_token> recuperacion = new List<LOCATION_token>();
+            recuperacion = clasificadorTexto.abstraccionTexto(texto);
+            TOKEN_sorter identificaion = new TOKEN_sorter();
+            identificaion.clsificarTokens(recuperacion);
+            List<ID_token> recuperacion2 = new List<ID_token>();
+            recuperacion2 = identificaion.GetID_Tokens();
+            foreach (ID_token token in recuperacion2)
+            {
+                Console.WriteLine("Tipo: "+token.getID()+" Contenido: "+token.getContenido());
+            }
+
+            resaltarPalabras.colorearTexto(CampoDeTexto,recuperacion2);
         }
     }
 }

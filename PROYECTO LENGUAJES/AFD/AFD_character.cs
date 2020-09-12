@@ -33,6 +33,7 @@ namespace PROYECTO_LENGUAJES.AFD
                             break;
                         default:
                             state = 0;
+                            aceptacion = false;
                             return aceptacion;
                     }
                 }
@@ -62,7 +63,7 @@ namespace PROYECTO_LENGUAJES.AFD
             }
             else
             {
-                this.state = 1;
+                this.state = 2;
                 aceptacion = false;
             }
         }

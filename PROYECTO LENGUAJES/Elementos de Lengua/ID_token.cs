@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,14 +10,43 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
     class ID_token
     {
         private String ID;
-        private String tipo;
+        private String contenido;
         private int lineaUbicacion;
+        private int inicioCadena;
+        private Color colorDeTexto;
 
-        public ID_token(String ID, String tipo, int ubicacion)
+        public ID_token(String ID, String contenido, int ubicacion,int inicioCadena,Color colorTexto)
         {
             this.ID = ID;
-            this.tipo = tipo;
+            this.contenido = contenido;
             this.lineaUbicacion = ubicacion;
+            this.inicioCadena = inicioCadena;
+            this.colorDeTexto = colorTexto;
+            ColorEspecial(contenido);
+        }
+
+        private void ColorEspecial(String tipo)
+        {
+            if (tipo.Equals("entero"))
+            {
+                this.colorDeTexto = Color.Purple;
+            }
+            if (tipo.Equals("decimal"))
+            {
+                this.colorDeTexto = Color.AliceBlue;
+            }
+            if (tipo.Equals("cadena"))
+            {
+                this.colorDeTexto = Color.Gray;
+            }
+            if (tipo.Equals("booleano"))
+            {
+                this.colorDeTexto = Color.Orange;
+            }
+            if (tipo.Equals("caracter"))
+            {
+                this.colorDeTexto = Color.Brown;
+            }
         }
 
         public String getID()
@@ -27,13 +57,13 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
         {
             this.ID = nombre;
         }
-        public String getTipo()
+        public String getContenido()
         {
-            return this.tipo;
+            return this.contenido;
         }
-        public void setTipo(String tipo)
+        public void setContenido(String tipo)
         {
-            this.tipo = tipo;
+            this.contenido = tipo;
         }
         public int getUbicacion()
         {
@@ -42,6 +72,14 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
         public void setUbicacion(int ubicacion)
         {
             this.lineaUbicacion = ubicacion;
+        }
+        public int getInicioCadena()
+        {
+            return this.inicioCadena;
+        }
+        public Color getColorDeTexto()
+        {
+            return this.colorDeTexto;
         }
     }
 }
