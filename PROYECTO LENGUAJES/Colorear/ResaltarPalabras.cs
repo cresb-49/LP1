@@ -18,6 +18,7 @@ namespace PROYECTO_LENGUAJES.Colorear
         public void colorearTexto(RichTextBox campoDeTexto, List<ID_token> tokens)
         {
             Color color;
+            //posicion donde se encuntra el apuntador antes de iniciar el metodo
             int pos = campoDeTexto.SelectionStart;
             campoDeTexto.SelectAll();
             //campoDeTexto.SelectionColor = Color.Black;

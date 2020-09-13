@@ -9,12 +9,15 @@ namespace PROYECTO_LENGUAJES.AFD
     class AFD_realNumber
     {
         private int state = 0;
+        private Boolean aceptacion = false;
         public AFD_realNumber()
         {
 
         }
         public Boolean analizar(String cadena)
         {
+            aceptacion = false;
+            state = 0;
             if (!cadena.Equals(""))
             {
                 String caracter = "";
@@ -24,69 +27,76 @@ namespace PROYECTO_LENGUAJES.AFD
                     switch (state)
                     {
                         case 0:
-                            if (State_0(caracter) == false)
-                            {
-                                return false;
-                            }
+                            State_0(caracter);
                             break;
                         case 1:
-                            if (State_1(caracter) == false)
-                            {
-                                return false;
-                            }
+                            State_1(caracter);
                             break;
                         case 2:
-                            if (State_2(caracter) == false)
-                            {
-                                return false;
-                            }
+                            State_2(caracter);
                             break;
                         default:
                             state = 0;
-                            return false;
+                            return aceptacion;
                     }
                 }
                 state = 0;
-                return true;
+                return aceptacion;
             }
             else
             {
                 state = 0;
-                return false;
+                return aceptacion;
             }
         }
-        private Boolean State_0(String caracter)
+        private void State_0(String caracter)
         {
             int acii = System.Convert.ToInt32(Convert.ToChar(caracter));
             if ((acii >= 48 && acii <= 57))
             {
                 this.state = 1;
-                return true;
+                aceptacion = false;
             }
-            return false;
+            else
+            {
+                this.state = 3;
+                aceptacion = false;
+            }
         }
-        private Boolean State_1(String caracter)
+        private void State_1(String caracter)
         {
             int acii = System.Convert.ToInt32(Convert.ToChar(caracter));
             if ((acii >= 48 && acii <= 57))
             {
                 this.state = 1;
-                return true;
+                aceptacion = false;
             }else if (caracter.Equals("."))
             {
                 this.state = 2;
+                aceptacion = false;
             }
-            return false;
-           
         }
-        private Boolean State_2(String caracter)
+        private void State_2(String caracter)
         {
-            if (caracter.Equals("."))
+            int acii = System.Convert.ToInt32(Convert.ToChar(caracter));
+            if ((acii >= 48 && acii <= 57))
             {
                 this.state = 2;
-                return true;
+                aceptacion = true;
             }
-            return false;
+            else
+            {
+                this.state = 3;
+                aceptacion = false;
+            }
+            /*
+            else
+            if (caracter.Equals("."))
+            {
+                this.state = 3;
+                aceptacion = false;
+            }
+             */
         }
     }
 }
