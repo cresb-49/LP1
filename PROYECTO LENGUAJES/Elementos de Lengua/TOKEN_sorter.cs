@@ -103,7 +103,7 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
                             }
                             else
                             {
-                                TOKEN_type.Add(new ID_token("uknound_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.CornflowerBlue));
+                                TOKEN_type.Add(new ID_token("unknown_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.CornflowerBlue));
                             }
                         }
                     }

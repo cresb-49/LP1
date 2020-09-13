@@ -25,6 +25,7 @@ namespace PROYECTO_LENGUAJES
         private String CurrentFileSource="";
         private ResaltarPalabras resaltarPalabras = new ResaltarPalabras();
         private Boolean realizarCambios = true;
+        private Boolean coloreadoSelectivo = false;
         private int carcater;
         
 
@@ -58,18 +59,15 @@ namespace PROYECTO_LENGUAJES
             identificaion.clsificarTokens(recuperacion);
             List<ID_token> recuperacion2 = new List<ID_token>();
             recuperacion2 = identificaion.GetID_Tokens();
-            String[] lineas = new string[((recuperacion2.Count)*3)];
-            int cont = 0;
+
+            String resultadoCompi = "";
             foreach (ID_token token in recuperacion2)
             {
-                lineas[cont] = "-----------------------------------------------------------------------------------------------------------------------------";
-                cont++;
-                lineas[cont] = "Token type: " + token.getID()+" Linea ubicacion: "+token.getUbicacion() + "  Contenido: " + token.getContenido();
-                cont++;
-                lineas[cont] = "-----------------------------------------------------------------------------------------------------------------------------";
-                cont++;
+                resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
+                resultadoCompi = resultadoCompi+"Token type: " + token.getID()+" Linea ubicacion: "+token.getUbicacion() + "  Contenido: " + token.getContenido()+"\n";
+                resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
             }
-            logText.Lines = lineas;
+            logText.Text = resultadoCompi;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -84,6 +82,7 @@ namespace PROYECTO_LENGUAJES
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            coloreadoSelectivo = false;
             buttonExportar.Enabled = false;
             logText.Lines = null;
             if (!CurrentFileSource.Equals(""))
@@ -106,6 +105,7 @@ namespace PROYECTO_LENGUAJES
                 resultado = manejadorArchivos.LecturaArchivo(src);
                 CampoDeTexto.Text = resultado;
                 editadoDeTexto();
+                coloreadoSelectivo = true;
             }
         }
 
@@ -159,6 +159,7 @@ namespace PROYECTO_LENGUAJES
                     CampoDeTexto.Enabled = true;
                     manejadorArchivos.CrearArchivo(source);
                     this.CurrentFileSource = source;
+                    coloreadoSelectivo = true;
                 }
             }
         }
@@ -244,13 +245,11 @@ namespace PROYECTO_LENGUAJES
 
         private void CampoDeTexto_TextChanged(object sender, EventArgs e)
         {
-            if (realizarCambios)
+            if (realizarCambios && coloreadoSelectivo)
             {
                 realizarCambios = false;
                 int numerolinea = CampoDeTexto.GetLineFromCharIndex(CampoDeTexto.SelectionStart) + 1;
                 Console.WriteLine(numerolinea);
-
-                //editadoDeTexto();
                 editadoDeTextoPorLinea(numerolinea);
                 realizarCambios = true;
             }
@@ -268,9 +267,11 @@ namespace PROYECTO_LENGUAJES
             List<ID_token> recuperacion2 = new List<ID_token>();
             recuperacion2 = identificaion.GetID_Tokens();
             resaltarPalabras.colorearTexto(CampoDeTexto, recuperacion2);
+            textoCompiLog(recuperacion2);
         }
         private void editadoDeTextoPorLinea(int linea)
         {
+            logText.Text = null;
             String texto = CampoDeTexto.Text;
             List<LOCATION_token> recuperacion = new List<LOCATION_token>();
             recuperacion = clasificadorTexto.abstraccionTexto(texto);
@@ -279,9 +280,22 @@ namespace PROYECTO_LENGUAJES
             List<ID_token> recuperacion2 = new List<ID_token>();
             recuperacion2 = identificaion.GetID_Tokens();
             resaltarPalabras.colorearTextoSegunLinea(CampoDeTexto, recuperacion2,linea);
+            textoCompiLog(recuperacion2);
         }
-
-
+        private void textoCompiLog(List<ID_token> tokens)
+        {
+            String reportes = "";
+            foreach (ID_token item in tokens)
+            {
+                if (item.getID().Equals("unknown_TOKEN"))
+                {
+                    reportes = reportes + "-----------------------------------------------------------------------------------------------------------------------\n";
+                    reportes = reportes + ("Token type: " + item.getID() + " Linea ubicacion: " + item.getUbicacion() + "  Contenido: " + item.getContenido()) + "\n";
+                    reportes = reportes + "-----------------------------------------------------------------------------------------------------------------------\n";
+                }
+            }
+            logText.Text = reportes;
+        }
         private void CampoDeTexto_KeyDown(object sender, KeyEventArgs e)
         {
             

@@ -223,6 +223,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                     {
                         if(apuntador1.Equals("/") && apuntador2.Equals("*"))
                         {
+                            int tempNumLinea = numeroLinea;
                             inicio = i;
                             int ubicacionEspacio=i;
                             //fin = i + 1;
@@ -251,12 +252,12 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                             if (fin == legth)
                             {
                                 extraccion = extraerTexto(arreglo, inicio, fin-1);
-                                token.Add(new LOCATION_token(extraccion, numeroLinea,inicio,(fin-1)));
+                                token.Add(new LOCATION_token(extraccion,tempNumLinea,inicio,(fin-1)));
                             }
                             else
                             {
                                 extraccion = extraerTexto(arreglo, inicio, fin + 1);
-                                token.Add(new LOCATION_token(extraccion, numeroLinea, inicio, (fin +1)));
+                                token.Add(new LOCATION_token(extraccion, tempNumLinea, inicio, (fin +1)));
                             }
                             
                             Console.WriteLine("aqui 7:" + extraccion + "---");
