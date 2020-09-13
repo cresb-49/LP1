@@ -63,11 +63,11 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
                             else
                             if (afdEnteros.analizar(token.getCadena()))
                             {
-                                TOKEN_type.Add(new ID_token("Number_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.Purple));
+                                TOKEN_type.Add(new ID_token("Number_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.BlueViolet));
                             } else
                             if (afdDecimales.analizar(token.getCadena()))
                             {
-                                TOKEN_type.Add(new ID_token("RealNumber_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.AliceBlue));
+                                TOKEN_type.Add(new ID_token("RealNumber_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.Cyan));
                             } else
                             if (aritemetics_Signs.analizar(token.getCadena()))
                             {
@@ -87,11 +87,11 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
                             } else
                             if (token.getCadena().Equals("="))
                             {
-                                TOKEN_type.Add(new ID_token("Asigment_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.Pink));
+                                TOKEN_type.Add(new ID_token("Asigment_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.HotPink));
                             } else
                             if (token.getCadena().Equals(";"))
                             {
-                                TOKEN_type.Add(new ID_token("Ending_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.Pink));
+                                TOKEN_type.Add(new ID_token("Ending_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.HotPink));
                             } else
                             if (afd_Cadena.analizar(token.getCadena()))
                             {
@@ -103,7 +103,7 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
                             }
                             else
                             {
-                                TOKEN_type.Add(new ID_token("uknound_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.BlueViolet));
+                                TOKEN_type.Add(new ID_token("uknound_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.CornflowerBlue));
                             }
                         }
                     }

@@ -14,6 +14,7 @@ using System.Net.Configuration;
 using PROYECTO_LENGUAJES.Colorear;
 using PROYECTO_LENGUAJES.Elementos_de_Lengua;
 using PROYECTO_LENGUAJES.AFD;
+using System.Threading;
 
 namespace PROYECTO_LENGUAJES
 {
@@ -23,8 +24,10 @@ namespace PROYECTO_LENGUAJES
         private Archivos manejadorArchivos = new Archivos();
         private String CurrentFileSource="";
         private ResaltarPalabras resaltarPalabras = new ResaltarPalabras();
+        private Boolean realizarCambios = true;
         private int carcater;
-       
+        
+
         public GTinsider()
         {
             InitializeComponent();
@@ -40,6 +43,7 @@ namespace PROYECTO_LENGUAJES
         {
             timer1.Interval = 10;
             timer1.Start();
+
         }
 
         private void compilarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -101,6 +105,7 @@ namespace PROYECTO_LENGUAJES
                 CampoDeTexto.Enabled = true;
                 resultado = manejadorArchivos.LecturaArchivo(src);
                 CampoDeTexto.Text = resultado;
+                editadoDeTexto();
             }
         }
 
@@ -239,7 +244,22 @@ namespace PROYECTO_LENGUAJES
 
         private void CampoDeTexto_TextChanged(object sender, EventArgs e)
         {
+            if (realizarCambios)
+            {
+                realizarCambios = false;
+                int numerolinea = CampoDeTexto.GetLineFromCharIndex(CampoDeTexto.SelectionStart) + 1;
+                Console.WriteLine(numerolinea);
+
+                //editadoDeTexto();
+                editadoDeTextoPorLinea(numerolinea);
+                realizarCambios = true;
+            }
             
+            
+        }
+
+        private void editadoDeTexto()
+        {
             String texto = CampoDeTexto.Text;
             List<LOCATION_token> recuperacion = new List<LOCATION_token>();
             recuperacion = clasificadorTexto.abstraccionTexto(texto);
@@ -247,12 +267,24 @@ namespace PROYECTO_LENGUAJES
             identificaion.clsificarTokens(recuperacion);
             List<ID_token> recuperacion2 = new List<ID_token>();
             recuperacion2 = identificaion.GetID_Tokens();
-            foreach (ID_token token in recuperacion2)
-            {
-                Console.WriteLine("Tipo: "+token.getID()+" Contenido: "+token.getContenido());
-            }
+            resaltarPalabras.colorearTexto(CampoDeTexto, recuperacion2);
+        }
+        private void editadoDeTextoPorLinea(int linea)
+        {
+            String texto = CampoDeTexto.Text;
+            List<LOCATION_token> recuperacion = new List<LOCATION_token>();
+            recuperacion = clasificadorTexto.abstraccionTexto(texto);
+            TOKEN_sorter identificaion = new TOKEN_sorter();
+            identificaion.clsificarTokens(recuperacion);
+            List<ID_token> recuperacion2 = new List<ID_token>();
+            recuperacion2 = identificaion.GetID_Tokens();
+            resaltarPalabras.colorearTextoSegunLinea(CampoDeTexto, recuperacion2,linea);
+        }
 
-            resaltarPalabras.colorearTexto(CampoDeTexto,recuperacion2);
+
+        private void CampoDeTexto_KeyDown(object sender, KeyEventArgs e)
+        {
+            
         }
     }
 }

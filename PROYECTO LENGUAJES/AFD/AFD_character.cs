@@ -73,17 +73,17 @@ namespace PROYECTO_LENGUAJES.AFD
             //Letras mayuscula
             if ((acii >= 65 && acii <= 90))
             {
-                this.state = 1;
+                this.state = 2;
                 aceptacion = false;
-            }
+            }else
             //Letras minusculas
             if (((acii >= 97 && acii <= 122)))
             {
-                this.state = 1;
+                this.state = 2;
                 aceptacion = false;
-            }
+            }else
             {
-                this.state = 0;
+                this.state = 2;
                 aceptacion = false;
             }
             

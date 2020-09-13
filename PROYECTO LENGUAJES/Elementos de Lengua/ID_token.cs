@@ -29,11 +29,11 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
         {
             if (tipo.Equals("entero"))
             {
-                this.colorDeTexto = Color.Purple;
+                this.colorDeTexto = Color.BlueViolet;
             }
             if (tipo.Equals("decimal"))
             {
-                this.colorDeTexto = Color.AliceBlue;
+                this.colorDeTexto = Color.Cyan;
             }
             if (tipo.Equals("cadena"))
             {

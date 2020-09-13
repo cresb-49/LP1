@@ -8,7 +8,7 @@ namespace PROYECTO_LENGUAJES.AFD
 {
     class WORD_recerved
     {
-        String[] palabrasRecervadas = new String[] { "SI", "SINO", "SINO_SI","MENTRAS","HACER","DESDE","HASTA","INCREMENTO"};
+        String[] palabrasRecervadas = new String[] { "SI", "SINO", "SINO_SI","MIENTRAS","HACER","DESDE","HASTA","INCREMENTO"};
         public WORD_recerved()
         {
 
