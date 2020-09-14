@@ -22,12 +22,6 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
         {
 
         }
-        public List<String> lineasTexto(String textoAnalizar)
-        {
-            List<String> resultados = new List<String>();
-            resultados = palabrasEncontadas(textoAnalizar);
-            return resultados;
-        }
         private String extraerTexto(String cadena, int inicio, int fin)
         {
             String temporal = "";
@@ -37,25 +31,9 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
             }
             return temporal;
         }
-        private int contadorEspacios(String cadenaProcesar)
-        {
-            int inicio = 0;
-            int cantidadEspacios = 0;
-            while (cadenaProcesar.IndexOf(" ", inicio) != -1)
-            {
-                if (cadenaProcesar.IndexOf(" ", inicio) > -1)
-                {
-                    cantidadEspacios++;
-                    inicio = cadenaProcesar.IndexOf(" ", inicio) + 1;
-                }
-            }
-            return cantidadEspacios;
-        }
         public List<LOCATION_token> abstraccionTexto(String arreglo)
         {
-            //agrega el caracter de finalizacion de lectura
             arreglo = arreglo + "  " + "\n";
-            //List<String> palabras = new List<String>();
             List<LOCATION_token> token = new List<LOCATION_token>();
             
             int inicio = 0;
@@ -65,14 +43,12 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
             String apuntador2;
             int i = 0;
             int numeroLinea = 1;
-            Console.WriteLine("Tamano del texto: " + legth);
             for (i = 0; i < (legth - 1); i++)
             {
                 apuntador1 = arreglo.Substring(i, 1);
                 apuntador2 = arreglo.Substring((i + 1), 1);
                 if(apuntador1.Equals("\n"))
                 {
-                    //Console.WriteLine(numeroLinea);
                     numeroLinea++;
                 }
 
@@ -80,21 +56,14 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                 {
                     fin = i;
                     String extraccion = extraerTexto(arreglo, inicio, fin);
-                    //Console.WriteLine("Apuntador1: " + apuntador1);
-                    //Console.WriteLine("Apuntador2: " + apuntador2);
-                    Console.WriteLine("Aqui 1:" + extraccion + "---");
                     if (!extraccion.Equals(" ")&& !extraccion.Equals("\n") && !extraccion.Equals("") && !extraccion.Equals("\t"))
                     {
                         if (extraccion.Equals(comillas) || extraccion.StartsWith(comillas))
                         {
                             //inicio es el mismo de la cadena de segundo analicis
-                            //Console.WriteLine("Candidato 1");
                             int saltoDeLinea = arreglo.IndexOf("\n", inicio);
-                            //Console.WriteLine("Salto de linea: " + inicio);
                             int rango = saltoDeLinea - inicio;
                             int segundaComilla = arreglo.IndexOf(comillas, inicio + 1, rango);
-                            //Console.WriteLine("inicio: "+inicio);
-                            //Console.WriteLine("Segunda Comilla aqui 1: " + segundaComilla);
                             fin = segundaComilla;
                             if (fin < 0)
                             {
@@ -102,7 +71,6 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                             }
                             extraccion = extraerTexto(arreglo, inicio, fin);
                             token.Add(new LOCATION_token(extraccion,numeroLinea,inicio));
-                            //palabras.Add(extraccion);
                         
                             inicio = fin + 1;
                             i = fin - 1;
@@ -110,7 +78,6 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                         else
                         {
                             token.Add(new LOCATION_token(extraccion, numeroLinea,inicio));
-                            //palabras.Add(extraccion);
                             if (apuntador2.Equals("\n"))
                             {
                                 inicio = fin + 2;
@@ -136,37 +103,26 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                     {
                         fin = i;
                         String extraccion = extraerTexto(arreglo, inicio, fin);
-                        //Console.WriteLine("Apuntador1: " + apuntador1);
-                        //Console.WriteLine("Apuntador2: " + apuntador2);
-                        Console.WriteLine("Aqui 2:" + extraccion + "---");
+                        ////Console.WriteLine("Aqui 2:" + extraccion + "---");
                         if (!extraccion.Equals(" ") && !extraccion.Equals("\n") && !extraccion.Equals("") && !extraccion.Equals("\t"))
                         {
                             if (extraccion.Equals(comillas) || extraccion.StartsWith(comillas))
                             {
-                                //inicio es el mismo de la cadena de segundo analicis
-                                //Console.WriteLine("Candidato aqui dos");
                                 int saltoDeLinea = arreglo.IndexOf("\n", inicio);
-                                //Console.WriteLine("Salto de linea: " + saltoDeLinea);
                                 int rango = saltoDeLinea - inicio;
-                                //Console.WriteLine("rango: " + rango);
                                 int segundaComilla = arreglo.IndexOf(comillas, inicio + 1, rango);
-                                //Console.WriteLine("inicio aqui dos: " + inicio);
-                                //Console.WriteLine("Segunda comilla aqui dos: " + segundaComilla);
                                 fin = segundaComilla;
                                 if (fin < 0)
                                 {
                                     fin = saltoDeLinea - 1;
                                 }
                                 extraccion = extraerTexto(arreglo, inicio, fin);
-                                //palabras.Add(extraccion);
-                                //Console.WriteLine("Verificacion linea:" + fin+"<>" + extraccion);
                                 token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
                                 inicio = fin + 1;
                                 i = fin - 1;
                             }
                             else
                             {
-                                //palabras.Add(extraccion);
                                 token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
                                 inicio = fin + 1;
                             }
@@ -192,8 +148,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                         fin = i;
                         inicio = i;
                         String extraccion = extraerTexto(arreglo, inicio, fin);
-                        Console.WriteLine("Aqui 3:" + extraccion +"---");
-                        //palabras.Add(extraccion);
+                        ////Console.WriteLine("Aqui 3:" + extraccion +"---");
                         token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
                         inicio = fin + 1;
 
@@ -204,16 +159,9 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                     if (apuntador1.Equals("/") && apuntador2.Equals("/"))
                     {
                         inicio = i;
-                        //fin = i + 1;
                         fin = arreglo.IndexOf("\n", i);
                         String extraccion = extraerTexto(arreglo, inicio, fin-1);
-                        Console.WriteLine("aqui 6:" + extraccion + "---");
-                        //palabras.Add(extraccion);
-                        //token.Add(new LOCATION_token(extraccion, numeroLinea));
-                        //inicio = fin + 1;
-                        //extraccion = extraerTexto(arreglo, inicio, fin-1);
-                        //Console.WriteLine("aqui 7: " + extraccion + "---");
-                        //palabras.Add(extraccion);
+                        ////Console.WriteLine("aqui 6:" + extraccion + "---");
                         token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
 
                         i = fin - 1;
@@ -226,14 +174,11 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                             int tempNumLinea = numeroLinea;
                             inicio = i;
                             int ubicacionEspacio=i;
-                            //fin = i + 1;
                             fin = arreglo.IndexOf("*/", i);
-                            //Console.WriteLine("Error: " + fin);
                             if (fin < 0)
                             {
                                 fin = legth;
                             }
-                            //Console.WriteLine("Error: " + fin);
                             do
                             {
                                 ubicacionEspacio = arreglo.IndexOf("\n", ubicacionEspacio + 1);
@@ -259,15 +204,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                             }
 
                             token.Add(new LOCATION_token(extraccion, tempNumLinea, inicio));
-                            Console.WriteLine("aqui 7:" + extraccion + "---");
-                            //palabras.Add(extraccion);
-                            //token.Add(new LOCATION_token(extraccion, numeroLinea));
-                            //inicio = fin + 1;
-                            //extraccion = extraerTexto(arreglo, inicio, fin-1);
-                            //Console.WriteLine("aqui 7: " + extraccion + "---");
-                            //palabras.Add(extraccion);
-                            //token.Add(new LOCATION_token(extraccion, numeroLinea);
-
+                            ////Console.WriteLine("aqui 7:" + extraccion + "---");
                             i = fin +1;
                             inicio = fin + 3;
                         }
@@ -276,10 +213,8 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                             inicio = i;
                             fin = i + 1;
                             String extraccion = extraerTexto(arreglo, inicio, fin);
-                            Console.WriteLine("aqui 4:" + extraccion + "---");
-                            //palabras.Add(extraccion);
+                            ////Console.WriteLine("aqui 4:" + extraccion + "---");
                             token.Add(new LOCATION_token(extraccion, numeroLinea,inicio));
-                            //apuntador1 = arreglo.Substring(fin+1, 1);
                             if (apuntador1.Equals("\n"))
                             {
                                 inicio = i + 3;
@@ -299,21 +234,13 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                         inicio = i;
                         fin = inicio;
                         String extraccion = extraerTexto(arreglo, inicio, fin);
-                        if (apuntador1.Equals("\n"))
-                        {
-                            Console.WriteLine("deduction");
-                        }
-                        Console.WriteLine("aqui 5:" + extraccion + "---");
-                        //palabras.Add(extraccion);
+                        ////Console.WriteLine("aqui 5:" + extraccion + "---");
                         token.Add(new LOCATION_token(extraccion, numeroLinea,inicio));
                         inicio = i + 1;
                     }
                 }
             }
-            //Console.WriteLine(numeroLinea);
-            //return palabras;
             return token;
-
         }
 
         private Boolean igualdadesAceptadas(String apuntador1, String apuntador2)
@@ -411,45 +338,6 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                 return true;
             }
             return false;
-        }
-        public List<String> palabrasEncontadas(String arreglo)
-        {
-
-            List<String> palabras = new List<String>();
-            List<String> subProcesadopalabras = new List<String>();
-            int inicio = 0;
-            int fin = 0;
-            fin = arreglo.IndexOf(" ") - 1;
-            for (int i = 0; i < contadorEspacios(arreglo); i++)
-            {
-                palabras.Add(extraerTexto(arreglo, inicio, fin));
-                inicio = fin + 2;
-                fin = arreglo.IndexOf(" ", inicio) - 1;
-            }
-            fin = (arreglo.Length) - 1;
-            String textoEncontrado = extraerTexto(arreglo, inicio, fin);
-            palabras.Add(textoEncontrado);
-            foreach (String cadena in palabras)
-            {
-                if (!cadena.Equals(""))
-                {
-                    subProcesadopalabras.Add(cadena);
-                }
-            }
-            return subProcesadopalabras;
-        }
-        public void ContadorCaracteres(String cadena)
-        {
-            int tam = 0;
-            tam = cadena.Length;
-            if (tamanoMax <= tam)
-            {
-                this.tamanoMax = tam;
-            }
-        }
-        public int getTamanoMax()
-        {
-            return this.tamanoMax;
         }
     }
 }
