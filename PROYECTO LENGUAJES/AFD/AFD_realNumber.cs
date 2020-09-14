@@ -35,6 +35,9 @@ namespace PROYECTO_LENGUAJES.AFD
                         case 2:
                             State_2(caracter);
                             break;
+                        case 3:
+                            State_3(caracter);
+                            break;
                         default:
                             state = 0;
                             return aceptacion;
@@ -59,7 +62,7 @@ namespace PROYECTO_LENGUAJES.AFD
             }
             else
             {
-                this.state = 3;
+                this.state = 4;
                 aceptacion = false;
             }
         }
@@ -75,28 +78,39 @@ namespace PROYECTO_LENGUAJES.AFD
                 this.state = 2;
                 aceptacion = false;
             }
+            else
+            {
+                this.state = 4;
+                aceptacion = false;
+            }
         }
         private void State_2(String caracter)
         {
             int acii = System.Convert.ToInt32(Convert.ToChar(caracter));
             if ((acii >= 48 && acii <= 57))
             {
-                this.state = 2;
+                this.state = 3;
                 aceptacion = true;
             }
             else
             {
-                this.state = 3;
+                this.state = 4;
                 aceptacion = false;
             }
-            /*
-            else
-            if (caracter.Equals("."))
+        }
+        private void State_3(String caracter)
+        {
+            int acii = System.Convert.ToInt32(Convert.ToChar(caracter));
+            if ((acii >= 48 && acii <= 57))
             {
                 this.state = 3;
+                aceptacion = true;
+            }
+            else
+            {
+                this.state = 4;
                 aceptacion = false;
             }
-             */
         }
     }
 }
