@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PROYECTO_LENGUAJES.AFD.AFD_cadena" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABYAAAAAAAAAAAAEAQAAAAAAAAI=</HashCode>
+      <FileName>AFD\AFD_cadena.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.AFD_character" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAEAQAAAAAAAAI=</HashCode>
+      <FileName>AFD\AFD_character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.AFD_Comentario" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQB4AAAAAAAAAAAAEAQAAAAAAAAI=</HashCode>
+      <FileName>AFD\AFD_Comentario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.AFD_enteros" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAEAQAAAAAAAAI=</HashCode>
+      <FileName>AFD\AFD_enteros.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.AFD_id_reference" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAEAQAAAAAAAAI=</HashCode>
+      <FileName>AFD\AFD_id_reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.AFD_realNumber" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABYAAAAAAAAAAAAEAQAAAAAAAAI=</HashCode>
+      <FileName>AFD\AFD_realNumber.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.Aritemetics_Signs" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAI=</HashCode>
+      <FileName>AFD\Aritemetics_Signs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.BooleanRefrence" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>AFD\BooleanRefrence.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.GroupingSing" Collapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAI=</HashCode>
+      <FileName>AFD\GroupingSing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.LogicOperators" Collapsed="true">
+    <Position X="7" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>AFD\LogicOperators.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.RelationalOperators" Collapsed="true">
+    <Position X="10.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAI=</HashCode>
+      <FileName>AFD\RelationalOperators.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.VAR_Type" Collapsed="true">
+    <Position X="12.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AFD\VAR_Type.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.AFD.WORD_recerved" Collapsed="true">
+    <Position X="5.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AFD\WORD_recerved.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.Colorear.ResaltarPalabras" Collapsed="true">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Colorear\ResaltarPalabras.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.Elementos_de_Lengua.ID_token">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Elementos de Lengua\ID_token.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.Elementos_de_Lengua.LOCATION_token">
+    <Position X="0.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Elementos de Lengua\LOCATION_token.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.Elementos_de_Lengua.Token" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAEAAAgAAAAAAAEAAAQAAASAAAAAAAABAEAAQ=</HashCode>
+      <FileName>Elementos de Lengua\Token.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.Elementos_de_Lengua.TOKEN_sorter" Collapsed="true">
+    <Position X="10.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAEAAAABAAAAAAEQAIIwIAAAAAAACCACSAAAAQ=</HashCode>
+      <FileName>Elementos de Lengua\TOKEN_sorter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.GTinsider" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FRUAgAQSACAEwBhCBBDHbAACQAAIZAAgAIQAAQBgEgE=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.Program" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.ManejoArchivos.Archivos" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAQAAAAAAIAAAAAIAAAAAA=</HashCode>
+      <FileName>ManejoArchivos\Archivos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.ProcesamientoTexto.SeparadorTexto" Collapsed="true">
+    <Position X="7" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgEAAAQAAgAAAAAAQAAAAAAAAAAAhIIEAAAQAA=</HashCode>
+      <FileName>ProcesamientoTexto\SeparadorTexto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.Properties.Resources" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PROYECTO_LENGUAJES.Properties.Settings" Collapsed="true">
+    <Position X="8.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
