@@ -7,21 +7,12 @@ using System.Threading.Tasks;
 
 namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
 {
-    class ID_token
+    class ID_token : Token
     {
-        private String ID;
-        private String contenido;
-        private int lineaUbicacion;
-        private int inicioCadena;
-        private Color colorDeTexto;
-
-        public ID_token(String ID, String contenido, int ubicacion,int inicioCadena,Color colorTexto)
+        
+        public ID_token(String ID, String contenido, int ubicacion, int inicioCadena, Color colorTexto)
+            : base(ID, contenido, ubicacion, inicioCadena, colorTexto)
         {
-            this.ID = ID;
-            this.contenido = contenido;
-            this.lineaUbicacion = ubicacion;
-            this.inicioCadena = inicioCadena;
-            this.colorDeTexto = colorTexto;
             ColorEspecial(contenido);
         }
 
@@ -47,39 +38,6 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
             {
                 this.colorDeTexto = Color.Brown;
             }
-        }
-
-        public String getID()
-        {
-            return this.ID;
-        }
-        public void setID(String nombre)
-        {
-            this.ID = nombre;
-        }
-        public String getContenido()
-        {
-            return this.contenido;
-        }
-        public void setContenido(String tipo)
-        {
-            this.contenido = tipo;
-        }
-        public int getUbicacion()
-        {
-            return this.lineaUbicacion;
-        }
-        public void setUbicacion(int ubicacion)
-        {
-            this.lineaUbicacion = ubicacion;
-        }
-        public int getInicioCadena()
-        {
-            return this.inicioCadena;
-        }
-        public Color getColorDeTexto()
-        {
-            return this.colorDeTexto;
         }
     }
 }

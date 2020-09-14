@@ -62,6 +62,7 @@
     <Compile Include="Colorear\ResaltarPalabras.cs" />
     <Compile Include="Elementos de Lengua\ID_token.cs" />
     <Compile Include="Elementos de Lengua\LOCATION_token.cs" />
+    <Compile Include="Elementos de Lengua\Token.cs" />
     <Compile Include="Elementos de Lengua\TOKEN_sorter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

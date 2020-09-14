@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO.IsolatedStorage;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using PROYECTO_LENGUAJES.AFD;
 namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
 {
@@ -35,80 +30,81 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
         {
             foreach (LOCATION_token token in DETECTED_tokens)
             {
-                if (wORD_Recerved.verificacion(token.getCadena()))
+                if (wORD_Recerved.verificacion(token.contenido))
                 {
-                    TOKEN_type.Add(new ID_token("ReservatedWord_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.Green));
+                    TOKEN_type.Add(new ID_token("ReservatedWord_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Green));
                 }
                 else
                 {
-                    if (vAR_Type.verificacion(token.getCadena())) {
-                        TOKEN_type.Add(new ID_token("VariableType_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.Blue));
+                    if (vAR_Type.verificacion(token.contenido)) {
+                        TOKEN_type.Add(new ID_token("VariableType_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Blue));
                     }
                     else
                     {
-                        if (booleanRefrence.analizar(token.getCadena()))
+                        if (booleanRefrence.analizar(token.contenido))
                         {
-                            TOKEN_type.Add(new ID_token("BooleanState_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.Orange));
+                            TOKEN_type.Add(new ID_token("BooleanState_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Orange));
                         }
                         else
                         {
-                            if (aFD_Id_Reference.analizar(token.getCadena()))
+                            if (aFD_Id_Reference.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("Id_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.Yellow));
+                                TOKEN_type.Add(new ID_token("Id_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Yellow));
                             }else
-                            if (afd_Character.analizar(token.getCadena()))
+                            if (afd_Character.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("character_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.Brown));
+                                TOKEN_type.Add(new ID_token("character_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Brown));
                             }
                             else
-                            if (afdEnteros.analizar(token.getCadena()))
+                            if (afdEnteros.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("Number_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.BlueViolet));
+                                TOKEN_type.Add(new ID_token("Number_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.BlueViolet));
                             } else
-                            if (afdDecimales.analizar(token.getCadena()))
+                            if (afdDecimales.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("RealNumber_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.Cyan));
+                                TOKEN_type.Add(new ID_token("RealNumber_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Cyan));
                             } else
-                            if (aritemetics_Signs.analizar(token.getCadena()))
+                            if (aritemetics_Signs.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("ArithmeticSign_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.Blue));
+                                TOKEN_type.Add(new ID_token("ArithmeticSign_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Blue));
                             } else
-                            if (relationalOperators.analizar(token.getCadena()))
+                            if (relationalOperators.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("RelationalOperator_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(),Color.Blue));
+                                TOKEN_type.Add(new ID_token("RelationalOperator_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Blue));
                             } else
-                            if (logicOperators.analizar(token.getCadena()))
+                            if (logicOperators.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("LogicOperators_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(), Color.Blue));
+                                TOKEN_type.Add(new ID_token("LogicOperators_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena, Color.Blue));
                             } else
-                            if (groupingSing.analizar(token.getCadena()))
+                            if (groupingSing.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("GroupingSing_TOKEN", token.getCadena(), token.getLineaUbicacion(),token.getInicioCadena(), Color.Blue));
+                                TOKEN_type.Add(new ID_token("GroupingSing_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena, Color.Blue));
                             } else
-                            if (token.getCadena().Equals("="))
+                            if (token.contenido.Equals("="))
                             {
-                                TOKEN_type.Add(new ID_token("Asigment_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.HotPink));
+                                TOKEN_type.Add(new ID_token("Asigment_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.HotPink));
                             } else
-                            if (token.getCadena().Equals(";"))
+                            if (token.contenido.Equals(";"))
                             {
-                                TOKEN_type.Add(new ID_token("Ending_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.HotPink));
+                                TOKEN_type.Add(new ID_token("Ending_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.HotPink));
                             } else
-                            if (afd_Cadena.analizar(token.getCadena()))
+                            if (afd_Cadena.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("String_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.Gray));
+                                TOKEN_type.Add(new ID_token("String_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Gray));
                             } else
-                            if (afd_Comentario.analizar(token.getCadena()))
+                            if (afd_Comentario.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("comment_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.Red));
+                                TOKEN_type.Add(new ID_token("comment_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Red));
                             }
                             else
                             {
-                                TOKEN_type.Add(new ID_token("unknown_TOKEN", token.getCadena(), token.getLineaUbicacion(), token.getInicioCadena(), Color.CornflowerBlue));
+                                TOKEN_type.Add(new ID_token("unknown_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.CornflowerBlue));
                             }
                         }
                     }
                 }
             }
+            DETECTED_tokens = null;
         }
         public List<ID_token> GetID_Tokens()
         {

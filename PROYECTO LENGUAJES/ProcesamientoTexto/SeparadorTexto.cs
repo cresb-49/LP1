@@ -101,7 +101,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                                 fin = saltoDeLinea-1;
                             }
                             extraccion = extraerTexto(arreglo, inicio, fin);
-                            token.Add(new LOCATION_token(extraccion,numeroLinea,inicio,fin));
+                            token.Add(new LOCATION_token(extraccion,numeroLinea,inicio));
                             //palabras.Add(extraccion);
                         
                             inicio = fin + 1;
@@ -109,7 +109,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                         }
                         else
                         {
-                            token.Add(new LOCATION_token(extraccion, numeroLinea,inicio, fin));
+                            token.Add(new LOCATION_token(extraccion, numeroLinea,inicio));
                             //palabras.Add(extraccion);
                             if (apuntador2.Equals("\n"))
                             {
@@ -160,14 +160,14 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                                 extraccion = extraerTexto(arreglo, inicio, fin);
                                 //palabras.Add(extraccion);
                                 //Console.WriteLine("Verificacion linea:" + fin+"<>" + extraccion);
-                                token.Add(new LOCATION_token(extraccion, numeroLinea, inicio, fin));
+                                token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
                                 inicio = fin + 1;
                                 i = fin - 1;
                             }
                             else
                             {
                                 //palabras.Add(extraccion);
-                                token.Add(new LOCATION_token(extraccion, numeroLinea, inicio, fin));
+                                token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
                                 inicio = fin + 1;
                             }
                         }
@@ -194,7 +194,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                         String extraccion = extraerTexto(arreglo, inicio, fin);
                         Console.WriteLine("Aqui 3:" + extraccion +"---");
                         //palabras.Add(extraccion);
-                        token.Add(new LOCATION_token(extraccion, numeroLinea, inicio, fin));
+                        token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
                         inicio = fin + 1;
 
                     }
@@ -214,7 +214,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                         //extraccion = extraerTexto(arreglo, inicio, fin-1);
                         //Console.WriteLine("aqui 7: " + extraccion + "---");
                         //palabras.Add(extraccion);
-                        token.Add(new LOCATION_token(extraccion, numeroLinea, inicio, fin-1));
+                        token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
 
                         i = fin - 1;
                         inicio = fin + 1;
@@ -252,14 +252,13 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                             if (fin == legth)
                             {
                                 extraccion = extraerTexto(arreglo, inicio, fin-1);
-                                token.Add(new LOCATION_token(extraccion,tempNumLinea,inicio,(fin-1)));
                             }
                             else
                             {
                                 extraccion = extraerTexto(arreglo, inicio, fin + 1);
-                                token.Add(new LOCATION_token(extraccion, tempNumLinea, inicio, (fin +1)));
                             }
-                            
+
+                            token.Add(new LOCATION_token(extraccion, tempNumLinea, inicio));
                             Console.WriteLine("aqui 7:" + extraccion + "---");
                             //palabras.Add(extraccion);
                             //token.Add(new LOCATION_token(extraccion, numeroLinea));
@@ -279,7 +278,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                             String extraccion = extraerTexto(arreglo, inicio, fin);
                             Console.WriteLine("aqui 4:" + extraccion + "---");
                             //palabras.Add(extraccion);
-                            token.Add(new LOCATION_token(extraccion, numeroLinea,inicio,fin));
+                            token.Add(new LOCATION_token(extraccion, numeroLinea,inicio));
                             //apuntador1 = arreglo.Substring(fin+1, 1);
                             if (apuntador1.Equals("\n"))
                             {
@@ -306,7 +305,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                         }
                         Console.WriteLine("aqui 5:" + extraccion + "---");
                         //palabras.Add(extraccion);
-                        token.Add(new LOCATION_token(extraccion, numeroLinea,inicio,fin));
+                        token.Add(new LOCATION_token(extraccion, numeroLinea,inicio));
                         inicio = i + 1;
                     }
                 }

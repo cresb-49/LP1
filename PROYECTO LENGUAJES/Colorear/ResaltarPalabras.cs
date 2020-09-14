@@ -19,14 +19,13 @@ namespace PROYECTO_LENGUAJES.Colorear
         //Este metodo solo se utliza al principio cuando se carga el docuemento a editar
         public void colorearTexto(RichTextBox campoDeTexto, List<ID_token> tokens)
         {
-            Color color;
             //posicion donde se encuntra el apuntador antes de iniciar el metodo
             int pos = campoDeTexto.SelectionStart;
             foreach (ID_token cadena in tokens)
             {
-                campoDeTexto.SelectionStart = cadena.getInicioCadena();
-                campoDeTexto.SelectionLength = cadena.getContenido().Length;
-                campoDeTexto.SelectionColor = cadena.getColorDeTexto();
+                campoDeTexto.SelectionStart = cadena.inicioCadena;
+                campoDeTexto.SelectionLength = cadena.contenido.Length;
+                campoDeTexto.SelectionColor = cadena.colorDeTexto;
                 //Restauracion de valores originales de posicion en richbox text
                 campoDeTexto.SelectionStart = pos;
                 campoDeTexto.SelectionLength = 0;
@@ -34,16 +33,15 @@ namespace PROYECTO_LENGUAJES.Colorear
         }
         public void colorearTextoSegunLinea(RichTextBox campoDeTexto, List<ID_token> tokens,int linea)
         {
-            Color color;
             //posicion donde se encuntra el apuntador antes de iniciar el metodo
             int pos = campoDeTexto.SelectionStart;
             foreach (ID_token cadena in tokens)
             {
-                if (cadena.getUbicacion() == linea)
+                if (cadena.lineaUbicacion == linea)
                 {
-                    campoDeTexto.SelectionStart = cadena.getInicioCadena();
-                    campoDeTexto.SelectionLength = cadena.getContenido().Length;
-                    campoDeTexto.SelectionColor = cadena.getColorDeTexto();
+                    campoDeTexto.SelectionStart = cadena.inicioCadena;
+                    campoDeTexto.SelectionLength = cadena.contenido.Length;
+                    campoDeTexto.SelectionColor = cadena.colorDeTexto;
                 }
 
                 //Restauracion de valores originales de posicion en richbox text

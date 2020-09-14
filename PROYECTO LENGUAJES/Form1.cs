@@ -64,7 +64,7 @@ namespace PROYECTO_LENGUAJES
             foreach (ID_token token in recuperacion2)
             {
                 resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
-                resultadoCompi = resultadoCompi+"Token type: " + token.getID()+" Linea ubicacion: "+token.getUbicacion() + "  Contenido: " + token.getContenido()+"\n";
+                resultadoCompi = resultadoCompi+"Token type: " + token.ID+" Linea ubicacion: "+token.lineaUbicacion + "  Contenido: " + token.contenido+"\n";
                 resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
             }
             logText.Text = resultadoCompi;
@@ -287,10 +287,10 @@ namespace PROYECTO_LENGUAJES
             String reportes = "";
             foreach (ID_token item in tokens)
             {
-                if (item.getID().Equals("unknown_TOKEN"))
+                if (item.ID.Equals("unknown_TOKEN"))
                 {
                     reportes = reportes + "-----------------------------------------------------------------------------------------------------------------------\n";
-                    reportes = reportes + ("Token type: " + item.getID() + " Linea ubicacion: " + item.getUbicacion() + "  Contenido: " + item.getContenido()) + "\n";
+                    reportes = reportes + ("Token type: " + item.ID + " Linea ubicacion: " + item.lineaUbicacion + "  Contenido: " + item.contenido) + "\n";
                     reportes = reportes + "-----------------------------------------------------------------------------------------------------------------------\n";
                 }
             }
