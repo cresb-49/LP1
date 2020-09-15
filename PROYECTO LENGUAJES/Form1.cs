@@ -298,6 +298,11 @@ namespace PROYECTO_LENGUAJES
         }
         private void CampoDeTexto_KeyDown(object sender, KeyEventArgs e)
         {
+            UbicacionCarrete.Text = "Ubicacion: linea " + (CampoDeTexto.GetLineFromCharIndex(CampoDeTexto.SelectionStart) + 1);
+        }
+
+        private void CampoDeTexto_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
             
         }
     }

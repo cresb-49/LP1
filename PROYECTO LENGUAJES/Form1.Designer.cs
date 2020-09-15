@@ -49,6 +49,7 @@
             this.buttonExportar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.UbicacionCarrete = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -72,6 +73,7 @@
             this.CampoDeTexto.WordWrap = false;
             this.CampoDeTexto.TextChanged += new System.EventHandler(this.CampoDeTexto_TextChanged);
             this.CampoDeTexto.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CampoDeTexto_KeyDown);
+            this.CampoDeTexto.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.CampoDeTexto_PreviewKeyDown);
             // 
             // menuStrip1
             // 
@@ -203,7 +205,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 11);
+            this.label1.Location = new System.Drawing.Point(809, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 0;
@@ -215,6 +217,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.panel1.Controls.Add(this.UbicacionCarrete);
             this.panel1.Controls.Add(this.buttonExportar);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(24, 290);
@@ -222,6 +225,18 @@
             this.panel1.Size = new System.Drawing.Size(992, 37);
             this.panel1.TabIndex = 3;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // UbicacionCarrete
+            // 
+            this.UbicacionCarrete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UbicacionCarrete.AutoSize = true;
+            this.UbicacionCarrete.Location = new System.Drawing.Point(14, 11);
+            this.UbicacionCarrete.Name = "UbicacionCarrete";
+            this.UbicacionCarrete.Size = new System.Drawing.Size(92, 13);
+            this.UbicacionCarrete.TabIndex = 2;
+            this.UbicacionCarrete.Text = "Ubicacion: linea 0";
             // 
             // GTinsider
             // 
@@ -271,6 +286,7 @@
         private System.Windows.Forms.Button buttonExportar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label UbicacionCarrete;
     }
 }
 
