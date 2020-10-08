@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PROYECTO_LENGUAJES.AFD
 {
@@ -54,7 +50,8 @@ namespace PROYECTO_LENGUAJES.AFD
                 //Letras mayuscula
                 this.state = 1;
                 aceptacion = true;
-            }else
+            }
+            else
             if (((acii >= 97 && acii <= 122)))
             {
                 //Letras minusculas
@@ -75,18 +72,20 @@ namespace PROYECTO_LENGUAJES.AFD
             {
                 this.state = 2;
                 aceptacion = false;
-            }else
+            }
+            else
             //Letras minusculas
             if (((acii >= 97 && acii <= 122)))
             {
                 this.state = 2;
                 aceptacion = false;
-            }else
+            }
+            else
             {
                 this.state = 2;
                 aceptacion = false;
             }
-            
+
         }
     }
 }

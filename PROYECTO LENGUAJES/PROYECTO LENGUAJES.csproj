@@ -70,6 +70,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lexemas\LexemasTokens.cs" />
     <Compile Include="ManejoArchivos\Archivos.cs" />
     <Compile Include="ProcesamientoTexto\SeparadorTexto.cs" />
     <Compile Include="Program.cs" />

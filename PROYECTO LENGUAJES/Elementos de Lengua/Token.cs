@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
 {
     class Token
     {
         private String _ID;
+        private String _lexema;
         private String _contenido;
         private int _lineaUbicacion;
         private int _inicioCadena;
         private Color _colorDeTexto;
-        public Token(String ID,String contenido,int lineaUbicacion,int inicioCadena,Color colorDeTexto)
+        public Token(String ID, String lexema, String contenido, int lineaUbicacion, int inicioCadena, Color colorDeTexto)
         {
             this._ID = ID;
             this._contenido = contenido;
@@ -27,6 +24,11 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
         {
             get { return _ID; }
             set { _ID = value; }
+        }
+        public String lexema
+        {
+            get { return _lexema; }
+            set { _lexema = value; }
         }
         public String contenido
         {

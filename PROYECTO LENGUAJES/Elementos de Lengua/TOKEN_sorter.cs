@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PROYECTO_LENGUAJES.AFD;
+using PROYECTO_LENGUAJES.Lexemas;
 using System.Collections.Generic;
 using System.Drawing;
-using PROYECTO_LENGUAJES.AFD;
 namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
 {
     class TOKEN_sorter
@@ -19,9 +19,13 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
         private AFD_cadena afd_Cadena = new AFD_cadena();
         private AFD_Comentario afd_Comentario = new AFD_Comentario();
         private AFD_character afd_Character = new AFD_character();
-        
+
         private List<ID_token> TOKEN_type = new List<ID_token>();
 
+
+        private string memoriaAsignacion = "";
+
+        private ID_token temp;
         public TOKEN_sorter()
         {
 
@@ -32,69 +36,124 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
             {
                 if (wORD_Recerved.verificacion(token.contenido))
                 {
-                    TOKEN_type.Add(new ID_token("ReservatedWord_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Green));
+                    temp = new ID_token("ReservatedWord_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Green);
+                    temp.lexema = temp.contenido.ToUpper();
+                    if (temp.lexema.Equals("LEER"))
+                    {
+                        memoriaAsignacion = "CADENA";
+                    }
+                    TOKEN_type.Add(temp);
                 }
                 else
                 {
-                    if (vAR_Type.verificacion(token.contenido)) {
-                        TOKEN_type.Add(new ID_token("VariableType_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Blue));
+                    if (vAR_Type.verificacion(token.contenido))
+                    {
+                        temp = new ID_token("VariableType_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Blue);
+                        temp.lexema = temp.contenido.ToUpper();
+                        memoriaAsignacion = temp.lexema;
+                        TOKEN_type.Add(temp);
                     }
                     else
                     {
                         if (booleanRefrence.analizar(token.contenido))
                         {
-                            TOKEN_type.Add(new ID_token("BooleanState_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Orange));
+                            temp = new ID_token("BooleanState_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Orange);
+                            temp.lexema = temp.contenido.ToUpper();
+                            TOKEN_type.Add(temp);
+                            
                         }
                         else
                         {
                             if (aFD_Id_Reference.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("Id_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Yellow));
-                            }else
+                                temp = new ID_token("Id_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Yellow);
+                                temp.lexema = "ID_" + memoriaAsignacion;
+                                TOKEN_type.Add(temp);
+                            }
+                            else
                             if (afd_Character.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("character_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Brown));
+                                temp = new ID_token("character_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Brown);
+                                temp.lexema = "LETRA";
+                                TOKEN_type.Add(temp);
                             }
                             else
                             if (afdEnteros.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("Number_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.BlueViolet));
-                            } else
+                                temp = new ID_token("Number_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.BlueViolet);
+                                temp.lexema = "NUMERO_E";
+                                TOKEN_type.Add(temp);
+                            }
+                            else
                             if (afdDecimales.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("RealNumber_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Cyan));
-                            } else
+                                temp = new ID_token("RealNumber_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Cyan);
+                                temp.lexema = "NUMERO_D";
+                                TOKEN_type.Add(temp);
+                            }
+                            else
                             if (aritemetics_Signs.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("ArithmeticSign_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Blue));
-                            } else
+                                temp = new ID_token("ArithmeticSign_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Blue);
+                                temp.lexema = temp.contenido;
+                                TOKEN_type.Add(temp);
+                            }
+                            else
                             if (relationalOperators.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("RelationalOperator_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena,Color.Blue));
-                            } else
+                                temp = new ID_token("RelationalOperator_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Blue);
+                                temp.lexema = "OP_RELACIONAL";
+                                TOKEN_type.Add(temp);
+                            }
+                            else
                             if (logicOperators.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("LogicOperators_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena, Color.Blue));
-                            } else
+                                temp = new ID_token("LogicOperators_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Blue);
+                                temp.lexema = "OP_LOGICO";
+                                TOKEN_type.Add(temp);
+                            }
+                            else
                             if (groupingSing.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("GroupingSing_TOKEN", token.contenido, token.lineaUbicacion,token.inicioCadena, Color.Blue));
-                            } else
+                                temp = new ID_token("GroupingSing_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Blue);
+                                temp.lexema = temp.contenido;
+                                TOKEN_type.Add(temp);
+                            }
+                            else
                             if (token.contenido.Equals("="))
                             {
-                                TOKEN_type.Add(new ID_token("Asigment_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.HotPink));
-                            } else
+                                temp = new ID_token("Asigment_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.HotPink);
+                                temp.lexema = "=";
+                                TOKEN_type.Add(temp);
+                            }
+                            else
                             if (token.contenido.Equals(";"))
                             {
-                                TOKEN_type.Add(new ID_token("Ending_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.HotPink));
-                            } else
+                                temp = new ID_token("Ending_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.HotPink);
+                                temp.lexema = ";";
+                                memoriaAsignacion = "";
+                                TOKEN_type.Add(temp);
+                            }
+                            else
+                            if (token.contenido.Equals(","))
+                            {
+                                temp = new ID_token("SeparadorVar_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.OrangeRed);
+                                temp.lexema = ",";
+                                TOKEN_type.Add(temp);
+                            }
+                            else
                             if (afd_Cadena.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("String_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Gray));
-                            } else
+                                temp = new ID_token("String_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Gray);
+                                temp.lexema = "CAD_TEXTO";
+                                TOKEN_type.Add(temp);
+                            }
+                            else
                             if (afd_Comentario.analizar(token.contenido))
                             {
-                                TOKEN_type.Add(new ID_token("comment_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Red));
+                                temp = new ID_token("comment_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Red);
+                                temp.lexema = "COMENTARIO";
+                                TOKEN_type.Add(temp);
                             }
                             else
                             {

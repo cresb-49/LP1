@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
 {
     class ID_token : Token
     {
-        
+
         public ID_token(String ID, String contenido, int ubicacion, int inicioCadena, Color colorTexto)
-            : base(ID, contenido, ubicacion, inicioCadena, colorTexto)
+            : base(ID,null, contenido, ubicacion, inicioCadena, colorTexto)
         {
             ColorEspecial(contenido);
         }
