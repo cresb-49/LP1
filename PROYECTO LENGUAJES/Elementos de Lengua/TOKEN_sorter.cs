@@ -1,6 +1,9 @@
 ﻿using PROYECTO_LENGUAJES.AFD;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
+
 namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
 {
     class TOKEN_sorter
@@ -66,8 +69,17 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
                             if (aFD_Id_Reference.analizar(token.contenido))
                             {
                                 temp = new ID_token("Id_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Yellow);
-                                temp.lexema = "ID_" + memoriaAsignacion;
-                                TOKEN_type.Add(temp);
+                                String IdTemp = this.buscarVariableDeclarada(temp);
+                                if (!(IdTemp.Equals("")))
+                                {
+                                    temp.lexema = IdTemp;
+                                    TOKEN_type.Add(temp);
+                                }
+                                else
+                                {
+                                    temp.lexema = "ID_" + memoriaAsignacion;
+                                    TOKEN_type.Add(temp);
+                                }
                             }
                             else
                             if (afd_Character.analizar(token.contenido))
@@ -169,6 +181,18 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
         public List<ID_token> GetID_Tokens()
         {
             return TOKEN_type;
+        }
+        
+        private String buscarVariableDeclarada(ID_token token)
+        {
+            foreach(ID_token tok in TOKEN_type)
+            {
+                if (tok.contenido.Equals(token.contenido))
+                {
+                    return tok.lexema;
+                }
+            }
+            return "";
         }
     }
 }

@@ -101,6 +101,18 @@ namespace PROYECTO_LENGUAJES.Pila
                     estado3(token, pila);
                     respuesta = true;
                     break;
+                case "ASIG_E2":
+                    ASIG_E2(token, pila);
+                    respuesta = true;
+                    break;
+                case "ASIG_E":
+                    ASIG_E(token, pila);
+                    respuesta = true;
+                    break;
+                case "ASIG_EP":
+                    ASIG_EP(token, pila);
+                    respuesta = true;
+                    break;
                 default:
                     respuesta = false;
                     break;
@@ -120,6 +132,12 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("(");
                 pila.Push("PRINCIPAL");
             }
+            else
+            {
+                errores.Add("Error en linea " + token.lineaUbicacion + " se esperaba el inicio de clase \"principal\"");
+                pila.Pop();
+                pila.Push(token.lexema);
+            }
         }
         public void estado1(ID_token token, Stack<String> pila)
         {
@@ -136,8 +154,9 @@ namespace PROYECTO_LENGUAJES.Pila
             }
             else
             {
-                pila.Push(token.lexema);
                 erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + "no se esperaba \" "+token.contenido+" \" ");
+                pila.Pop();
+                pila.Push(token.lexema);
             }
         }
 
@@ -146,10 +165,9 @@ namespace PROYECTO_LENGUAJES.Pila
             if (token.lexema.Equals("ID_ENTERO"))
             {
                 pila.Pop();
-                pila.Push(";");
-                pila.Push("NUMERO_E");
-                pila.Push("=");
+                pila.Push("ASIG_E");
                 pila.Push("ID_ENTERO");
+
             }
             else if (token.lexema.Equals("ID_DECIMAL"))
             {
@@ -171,8 +189,9 @@ namespace PROYECTO_LENGUAJES.Pila
             }
             else
             {
-                pila.Push(token.lexema);
+                pila.Pop();
                 erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + " \" " + token.contenido + " \" la variable no esta declarada");
+                pila.Push(token.lexema);
             }
             /*
             else if (token.lexema.Equals("ID_BOOLEANO"))
@@ -198,9 +217,7 @@ namespace PROYECTO_LENGUAJES.Pila
             if (token.lexema.Equals("ENTERO"))
             {
                 pila.Pop();
-                pila.Push(";");
-                pila.Push("NUMERO_E");
-                pila.Push("=");
+                pila.Push("ASIG_E2");
                 pila.Push("ID_ENTERO");
                 pila.Push("ENTERO");
             }
@@ -226,11 +243,65 @@ namespace PROYECTO_LENGUAJES.Pila
             }
             else
             {
-                pila.Push(token.lexema);
+                //pila.Pop();
                 erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + " se esperaba declaracion u otro metodo");
+                pila.Push(token.lexema);
             }
         }
+        private void ASIG_E(ID_token token, Stack<String> pila)
+        {
+            if (token.lexema.Equals("="))
+            {
+                pila.Pop();
+                pila.Push(";");
+                pila.Push("ASIG_EP");
+                pila.Push("=");
 
+            }
+            else
+            {
+                errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion de tipo entero");
+                pila.Push(token.lexema);
+            }
+        }
+        private void ASIG_E2(ID_token token, Stack<String> pila)
+        {
+            if (token.lexema.Equals("="))
+            {
+                pila.Pop();
+                pila.Push(";");
+                pila.Push("ASIG_EP");
+                pila.Push("=");
+
+            }
+            else if (token.lexema.Equals(";"))
+            {
+                pila.Pop();
+                pila.Push(";");
+            }
+            else
+            {
+                errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                pila.Push(token.lexema);
+            }
+        }
+        private void ASIG_EP(ID_token token, Stack<String> pila)
+        {
+            if (token.lexema.Equals("NUMERO_E"))
+            {
+                pila.Pop();
+                pila.Push("NUMERO_E");
+            }else if (token.lexema.Equals("ID_ENTERO"))
+            {
+                pila.Pop();
+                pila.Push("ID_ENTERO");
+            }
+            else
+            {
+                errores.Add("Error en la linea "+token.lineaUbicacion+" se esperaba una asignacion de tipo entero");
+                pila.Push(token.lexema);
+            }
+        }
         private Boolean isTerminal(String lexema)
         {
             foreach(String var in estadosTerminales)
