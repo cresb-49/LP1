@@ -1,5 +1,4 @@
 ﻿using PROYECTO_LENGUAJES.AFD;
-using PROYECTO_LENGUAJES.Lexemas;
 using System.Collections.Generic;
 using System.Drawing;
 namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
@@ -157,7 +156,9 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
                             }
                             else
                             {
-                                TOKEN_type.Add(new ID_token("unknown_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.CornflowerBlue));
+                                temp = new ID_token("unknown_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.CornflowerBlue);
+                                temp.lexema = "ERROR";
+                                TOKEN_type.Add(temp);
                             }
                         }
                     }

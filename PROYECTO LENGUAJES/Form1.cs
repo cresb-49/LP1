@@ -1,6 +1,7 @@
 ﻿using PROYECTO_LENGUAJES.Colorear;
 using PROYECTO_LENGUAJES.Elementos_de_Lengua;
 using PROYECTO_LENGUAJES.ManejoArchivos;
+using PROYECTO_LENGUAJES.Pila;
 using PROYECTO_LENGUAJES.ProcesamientoTexto;
 using System;
 using System.Collections.Generic;
@@ -53,14 +54,36 @@ namespace PROYECTO_LENGUAJES
             List<ID_token> recuperacion2 = new List<ID_token>();
             recuperacion2 = identificaion.GetID_Tokens();
 
+            
+
             String resultadoCompi = "";
             foreach (ID_token token in recuperacion2)
             {
-                resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
-                resultadoCompi = resultadoCompi + "Token type: " + token.ID + " Lexema: " + token.lexema + " Linea ubicacion: " + token.lineaUbicacion + "  Contenido: " + token.contenido + "\n";
-                resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
+                if (token.ID.Equals("unknown_TOKEN"))
+                {
+                    resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
+                    resultadoCompi = resultadoCompi + "Token type: " + token.ID + " Lexema: " + token.lexema + " Linea ubicacion: " + token.lineaUbicacion + "  Contenido: " + token.contenido + "\n";
+                    resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
+                }
             }
+            resultadoCompi = resultadoCompi + "---------------RESULTADO DE ANALISIS SINTACTICO---------------"+"\n";
+            AnalicisSintactico an = new AnalicisSintactico();
+            an.ejecutar(recuperacion2);
+            if (an.errores.Count == 0)
+            {
+                resultadoCompi = resultadoCompi + "---------------NINGUN FALLO DE GRAMATICA---------------" + "\n";
+            }
+            else
+            {
+                foreach (String res in an.errores)
+                {
+                    resultadoCompi = resultadoCompi + res + "\n";
+                }
+            }
+            
+
             logText.Text = resultadoCompi;
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
