@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace PROYECTO_LENGUAJES.Pila
 {
@@ -15,7 +17,7 @@ namespace PROYECTO_LENGUAJES.Pila
         private List<String> erroresSintaxis = new List<String>();
 
         private String[] estadosTerminales = {"PRICIPAL","(",")","{","}","ENTERO","DECIMAL","BOOLEANO","CARACTER","CADENA","ID_ENTERO", "ID_DECIMAL", "ID_BOOLEANO",
-                                                "ID_CARACTER", "ID_CADENA","NUMERO_E","NUMERO_D","CAD_TEXTO",";","=","VERDADERO","FALSO"};
+                                                "ID_CARACTER", "ID_CADENA","NUMERO_E","NUMERO_D","CAD_TEXTO",";","=","VERDADERO","FALSO","SI","MIENTRAS"};
         public AnalicisSintactico()
         {
 
@@ -43,10 +45,7 @@ namespace PROYECTO_LENGUAJES.Pila
                     do
                     {
                         res = verificacionTerminal(token, pila);
-                        if (pila.Count > 0)
-                        {
-                            Console.WriteLine("Estado: "+pila.Peek()+" Lexema: "+token.lexema);
-                        }
+                        escribirTransicion(token, pila);
                     } while (res);
                 }
                 foreach(String var in pila)
@@ -101,6 +100,10 @@ namespace PROYECTO_LENGUAJES.Pila
                     estado3(token, pila);
                     respuesta = true;
                     break;
+                case "4":
+                    estado4(token, pila);
+                    respuesta = true;
+                    break;
                 case "ASIG_E2":
                     ASIG_E2(token, pila);
                     respuesta = true;
@@ -149,7 +152,28 @@ namespace PROYECTO_LENGUAJES.Pila
                     ASIG_B2(token, pila);
                     respuesta = true;
                     break;
+                case "ASIG_C":
+                    ASIG_C(token, pila);
+                    respuesta = true;
+                    break;
+                case "ASIG_CP":
+                    ASIG_CP(token, pila);
+                    respuesta = true;
+                    break;
+                case "ASIG_C2":
+                    ASIG_C2(token, pila);
+                    respuesta = true;
+                    break;
+                case "LOGICA":
+                    LOGICA(token, pila);
+                    respuesta = true;
+                    break;
+                case "ESTADO_LOGICO":
+                    ESTADO_LOGICO(token, pila);
+                    respuesta = true;
+                    break;
                 default:
+                    errores.Add("Error en linea " + token.lineaUbicacion + " no se esperaba otro token");
                     respuesta = false;
                     break;
             }
@@ -174,6 +198,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Pop();
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
         public void estado1(ID_token token, Stack<String> pila)
         {
@@ -184,9 +209,13 @@ namespace PROYECTO_LENGUAJES.Pila
             {
                 pila.Push("3");
             }
+            else if (token.ID.Equals("ReservatedWord_TOKEN"))
+            {
+                pila.Push("4");
+            }
             else if (token.lexema.Equals("}"))
             {
-                pila.Pop();
+                //pila.Pop();
                 pila.Pop();
             }
             else
@@ -195,8 +224,79 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Pop();
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
+        public void estado4(ID_token token, Stack<String> pila)
+        {
+            if (token.lexema.Equals("MIENTRAS"))
+            {
+                pila.Pop();
+                pila.Push("}");
+                pila.Push("1");
+                pila.Push("{");
+                pila.Push(")");
+                pila.Push("LOGICA");
+                pila.Push("(");
+                pila.Push("MIENTRAS");
+            }
+            else if (token.lexema.Equals("SI"))
+            {
+                pila.Pop();
+                pila.Push("}");
+                pila.Push("1");
+                pila.Push("{");
+                pila.Push(")");
+                pila.Push("LOGICA");
+                pila.Push("(");
+                pila.Push("SI");
+            }
+            else
+            {
+                erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + " no se esperaba \" " + token.contenido + " \" ");
+                pila.Pop();
+                pila.Push(token.lexema);
+            }
+            escribirTransicion(token, pila);
+        }
+        public void LOGICA(ID_token token, Stack<String> pila)
+        {
+            if (token.ID.Equals("BooleanState_TOKEN")||token.lexema.Equals("ID_BOOLEANO"))
+            {
+                pila.Pop();
+                pila.Push("ESTADO_LOGICO");
+            }
+            else
+            {
+                erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una sentencia booleana");
+                pila.Pop();
+                pila.Push(token.lexema);
+            }
+            escribirTransicion(token, pila);
+        }
+        public void ESTADO_LOGICO(ID_token token, Stack<String> pila)
+        {
+            if (token.lexema.Equals("VERDADERO"))
+            {
+                pila.Pop();
+                pila.Push("VERDADERO");
 
+            } else if (token.lexema.Equals("FALSO"))
+            {
+                pila.Pop();
+                pila.Push("FALSO");
+
+            } else if (token.lexema.Equals("ID_BOOLEANO"))
+            {
+                pila.Pop();
+                pila.Push("ID_BOOLEANO");
+            }
+            else
+            {
+                erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una sentencia booleana");
+                pila.Pop();
+                pila.Push(token.lexema);
+            }
+        }
         public void estado2(ID_token token, Stack<String> pila)
         {
             if (token.lexema.Equals("ID_ENTERO"))
@@ -227,21 +327,18 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("ID_BOOLEANO");
 
             }
+            else if (token.lexema.Equals("ID_CARACTER"))
+            {
+                pila.Push("ASIG_C");
+                pila.Push("ID_CARACTER");
+            }
             else
             {
                 pila.Pop();
                 erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + " \" " + token.contenido + " \" la variable no esta declarada");
                 pila.Push(token.lexema);
             }
-            /*
-            else if (token.lexema.Equals("ID_CARACTER"))
-            {
-                pila.Push(";");
-                pila.Push("NUMERO_E");
-                pila.Push("=");
-                pila.Push("ID_CARACTER");
-            }
-            */
+            escribirTransicion(token, pila);
         }
 
         public void estado3(ID_token token, Stack<String> pila)
@@ -268,12 +365,20 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("ID_CADENA");
                 pila.Push("CADENA");
 
-            }else if (token.lexema.Equals("BOOLEANO"))
+            }
+            else if (token.lexema.Equals("BOOLEANO"))
             {
                 pila.Pop();
                 pila.Push("ASIG_B2");
                 pila.Push("ID_BOOLEANO");
                 pila.Push("BOOLEANO");
+            }
+            else if (token.lexema.Equals("CARACTER"))
+            {
+                pila.Pop();
+                pila.Push("ASIG_C2");
+                pila.Push("ID_CARACTER");
+                pila.Push("CARACTER");
             }
             else
             {
@@ -281,6 +386,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + " se esperaba declaracion u otro metodo");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
         private void ASIG_E(ID_token token, Stack<String> pila)
         {
@@ -310,6 +416,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion de tipo entero");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
         private void ASIG_D(ID_token token, Stack<String> pila)
         {
@@ -339,6 +446,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion de tipo decimal u entera");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
         private void ASIG_S(ID_token token, Stack<String> pila)
         {
@@ -356,6 +464,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion de tipo cadena");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
         private void ASIG_B(ID_token token, Stack<String> pila)
         {
@@ -365,7 +474,6 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push(";");
                 pila.Push("ASIG_BP");
                 pila.Push("=");
-
             }
             else
             {
@@ -373,6 +481,24 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion de tipo cadena");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
+        }
+        private void ASIG_C(ID_token token, Stack<String> pila)
+        {
+            if (token.lexema.Equals("="))
+            {
+                pila.Pop();
+                pila.Push(";");
+                pila.Push("ASIG_CP");
+                pila.Push("=");
+            }
+            else
+            {
+                pila.Pop();
+                errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion de tipo caracter");
+                pila.Push(token.lexema);
+            }
+            escribirTransicion(token, pila);
         }
         private void ASIG_E2(ID_token token, Stack<String> pila)
         {
@@ -395,6 +521,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
         private void ASIG_D2(ID_token token, Stack<String> pila)
         {
@@ -417,6 +544,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
         private void ASIG_S2(ID_token token, Stack<String> pila)
         {
@@ -439,6 +567,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
         private void ASIG_B2(ID_token token, Stack<String> pila)
         {
@@ -461,6 +590,30 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
+        }
+        private void ASIG_C2(ID_token token, Stack<String> pila)
+        {
+            if (token.lexema.Equals("="))
+            {
+                pila.Pop();
+                pila.Push(";");
+                pila.Push("ASIG_CP");
+                pila.Push("=");
+
+            }
+            else if (token.lexema.Equals(";"))
+            {
+                pila.Pop();
+                pila.Push(";");
+            }
+            else
+            {
+                pila.Pop();
+                errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                pila.Push(token.lexema);
+            }
+            escribirTransicion(token, pila);
         }
         private void ASIG_EP(ID_token token, Stack<String> pila)
         {
@@ -490,6 +643,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea "+token.lineaUbicacion+" se esperaba una asignacion de tipo entero");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
         private void ASIG_DP(ID_token token, Stack<String> pila)
         {
@@ -529,6 +683,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion de tipo decimal u entera");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
         private void ASIG_SP(ID_token token, Stack<String> pila)
         {
@@ -559,6 +714,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion de tipo cadena");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
         private void ASIG_BP(ID_token token, Stack<String> pila)
         {
@@ -594,7 +750,48 @@ namespace PROYECTO_LENGUAJES.Pila
                 errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion de tipo booleano");
                 pila.Push(token.lexema);
             }
+            escribirTransicion(token, pila);
         }
+        private void ASIG_CP(ID_token token, Stack<String> pila)
+        {
+            if (token.lexema.Equals("LETRA"))
+            {
+                pila.Pop();
+                pila.Push("LETRA");
+            }
+            else if (token.lexema.Equals("ID_CARACTER"))
+            {
+                pila.Pop();
+                pila.Push("ID_CARACTER");
+            }
+            else
+            {
+                pila.Pop();
+                if (token.ID.Equals("Id_TOKEN"))
+                {
+                    if (token.lexema.Equals("ID_"))
+                    {
+                        errores.Add("Error en la linea " + token.lineaUbicacion + " la variable \" " + token.contenido + " \" no esta declarada");
+                    }
+                    else
+                    {
+                        errores.Add("Error en la linea " + token.lineaUbicacion + " la variable \" " + token.contenido + " \" ya esta declarada");
+                    }
+                }
+                errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion de tipo caracter");
+                pila.Push(token.lexema);
+            }
+            escribirTransicion(token, pila);
+        }
+
+        private void ES_MIENTRAS(ID_token token, Stack<String> pila)
+        {
+            if (token.lexema.Equals("MIENTRAS"))
+            {
+
+            }
+        }
+
         private Boolean isTerminal(String lexema)
         {
             foreach(String var in estadosTerminales)
@@ -605,6 +802,13 @@ namespace PROYECTO_LENGUAJES.Pila
                 }
             }
             return false;
+        }
+        private void escribirTransicion(ID_token token, Stack<String> pila)
+        {
+            if (pila.Count > 0)
+            {
+                Console.WriteLine("Estado: " + pila.Peek() + " Lexema: " + token.lexema);
+            }
         }
     }
 }
