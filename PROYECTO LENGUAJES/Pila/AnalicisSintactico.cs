@@ -172,6 +172,10 @@ namespace PROYECTO_LENGUAJES.Pila
                     ESTADO_LOGICO(token, pila);
                     respuesta = true;
                     break;
+                case "NUM":
+                    NUM(token, pila);
+                    respuesta = true;
+                    break;
                 default:
                     errores.Add("Error en linea " + token.lineaUbicacion + " no se esperaba otro token");
                     respuesta = false;
@@ -265,6 +269,13 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Pop();
                 pila.Push("ESTADO_LOGICO");
             }
+            else if (token.lexema.Equals("NUMERO_E")|| token.lexema.Equals("NUMERO_D") || token.lexema.Equals("ID_ENTERO") || token.lexema.Equals("ID_DECIMAL"))
+            {
+                pila.Pop();
+                pila.Push("NUM");
+                pila.Push("OP_RELACIONAL");
+                pila.Push("NUM");
+            }
             else
             {
                 erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una sentencia booleana");
@@ -272,6 +283,34 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push(token.lexema);
             }
             escribirTransicion(token, pila);
+        }
+        private void NUM(ID_token token, Stack<String> pila)
+        {
+            if (token.lexema.Equals("NUMERO_E"))
+            {
+                pila.Pop();
+                pila.Push("NUMERO_E");
+            }
+            else if (token.lexema.Equals("NUMERO_D"))
+            {
+                pila.Pop();
+                pila.Push("NUMERO_D");
+            } else if (token.lexema.Equals("ID_ENTERO"))
+            {
+                pila.Pop();
+                pila.Push("ID_ENTERO");
+            }
+            else if (token.lexema.Equals("ID_DECIMAL"))
+            {
+                pila.Pop();
+                pila.Push("ID_DECIMAL");
+            }
+            else
+            {
+                erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una sentencia booleana");
+                pila.Pop();
+                pila.Push(token.lexema);
+            }
         }
         public void ESTADO_LOGICO(ID_token token, Stack<String> pila)
         {
