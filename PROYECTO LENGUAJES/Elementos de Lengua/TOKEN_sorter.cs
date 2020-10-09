@@ -135,6 +135,7 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
                             {
                                 temp = new ID_token("Asigment_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.HotPink);
                                 temp.lexema = "=";
+                                memoriaAsignacion = "";
                                 TOKEN_type.Add(temp);
                             }
                             else
