@@ -54,7 +54,7 @@ namespace PROYECTO_LENGUAJES
             List<ID_token> recuperacion2 = new List<ID_token>();
             recuperacion2 = identificaion.GetID_Tokens();
 
-            
+            Boolean banderaSintactico = true;
 
             String resultadoCompi = "";
             foreach (ID_token token in recuperacion2)
@@ -64,24 +64,31 @@ namespace PROYECTO_LENGUAJES
                     resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
                     resultadoCompi = resultadoCompi + "Token type: " + token.ID + " Lexema: " + token.lexema + " Linea ubicacion: " + token.lineaUbicacion + "  Contenido: " + token.contenido + "\n";
                     resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
+                    banderaSintactico = false;
                 }
             }
-            resultadoCompi = resultadoCompi + "---------------RESULTADO DE ANALISIS SINTACTICO---------------"+"\n";
-            AnalicisSintactico an = new AnalicisSintactico();
-            an.ejecutar(recuperacion2);
-            if (an.errores.Count == 0)
+            if (banderaSintactico)
             {
-                resultadoCompi = resultadoCompi + "---------------NINGUN FALLO DE GRAMATICA---------------" + "\n";
+                resultadoCompi = resultadoCompi + "---------------RESULTADO DE ANALISIS SINTACTICO---------------" + "\n";
+                AnalicisSintactico an = new AnalicisSintactico();
+                an.ejecutar(recuperacion2);
+                if (an.errores.Count == 0)
+                {
+                    resultadoCompi = resultadoCompi + "---------------NINGUN FALLO DE GRAMATICA---------------" + "\n";
+                }
+                else
+                {
+                    foreach (String res in an.errores)
+                    {
+                        resultadoCompi = resultadoCompi + res + "\n";
+                    }
+                }
             }
             else
             {
-                foreach (String res in an.errores)
-                {
-                    resultadoCompi = resultadoCompi + res + "\n";
-                }
+                resultadoCompi = resultadoCompi + "---------------EXISTEN ERRORES DE ESCRITURA---------------" + "\n";
             }
             
-
             logText.Text = resultadoCompi;
 
         }

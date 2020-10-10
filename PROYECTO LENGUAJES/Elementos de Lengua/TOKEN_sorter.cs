@@ -120,7 +120,7 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
                             if (logicOperators.analizar(token.contenido))
                             {
                                 temp = new ID_token("LogicOperators_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Blue);
-                                temp.lexema = "OP_LOGICO";
+                                temp.lexema = temp.contenido;
                                 TOKEN_type.Add(temp);
                             }
                             else
