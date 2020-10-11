@@ -76,7 +76,7 @@ namespace PROYECTO_LENGUAJES.Pila
 
                     errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba " + " \""+pila.Peek()+" \" ");
                     pila.Pop();
-                    pila.Push(token.lexema);
+                    //pila.Push(token.lexema);
                     escribirTransicion(token, pila);
                     return true;
                 }
@@ -263,17 +263,12 @@ namespace PROYECTO_LENGUAJES.Pila
             }
             else if (token.lexema.Equals("COMENTARIO"))
             {
+                ///la produccion genera el estado terminal de tipo COMENTARIO
                 pila.Push("COMENTARIO");
-            }
-            else if (token.lexema.Equals("}"))
-            {
-                pila.Pop();
             }
             else
             {
-                erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + " no se esperaba \" "+token.contenido+" \" ");
                 pila.Pop();
-                pila.Push(token.lexema);
             }
             escribirTransicion(token, pila);
         }
@@ -812,7 +807,14 @@ namespace PROYECTO_LENGUAJES.Pila
             else
             {
                 pila.Pop();
-                errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                if (token.ID.Equals("Id_TOKEN"))
+                {
+                    errores.Add("Error en la linea " + token.lineaUbicacion + " la variable \" "+token.contenido+" \" ya ah sido declarada con anteoridad");
+                }
+                else
+                {
+                    errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                }
                 pila.Push(token.lexema);
             }
             escribirTransicion(token, pila);
@@ -848,7 +850,14 @@ namespace PROYECTO_LENGUAJES.Pila
             else
             {
                 pila.Pop();
-                errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                if (token.ID.Equals("Id_TOKEN"))
+                {
+                    errores.Add("Error en la linea " + token.lineaUbicacion + " la variable \" " + token.contenido + " \" ya ah sido declarada con anteoridad");
+                }
+                else
+                {
+                    errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                }
                 pila.Push(token.lexema);
             }
             escribirTransicion(token, pila);
@@ -884,7 +893,14 @@ namespace PROYECTO_LENGUAJES.Pila
             else
             {
                 pila.Pop();
-                errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                if (token.ID.Equals("Id_TOKEN"))
+                {
+                    errores.Add("Error en la linea " + token.lineaUbicacion + " la variable \" " + token.contenido + " \" ya ah sido declarada con anteoridad");
+                }
+                else
+                {
+                    errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                }
                 pila.Push(token.lexema);
             }
             escribirTransicion(token, pila);
@@ -920,7 +936,14 @@ namespace PROYECTO_LENGUAJES.Pila
             else
             {
                 pila.Pop();
-                errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                if (token.ID.Equals("Id_TOKEN"))
+                {
+                    errores.Add("Error en la linea " + token.lineaUbicacion + " la variable \" " + token.contenido + " \" ya ah sido declarada con anteoridad");
+                }
+                else
+                {
+                    errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                }
                 pila.Push(token.lexema);
             }
             escribirTransicion(token, pila);
@@ -956,7 +979,14 @@ namespace PROYECTO_LENGUAJES.Pila
             else
             {
                 pila.Pop();
-                errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                if (token.ID.Equals("Id_TOKEN"))
+                {
+                    errores.Add("Error en la linea " + token.lineaUbicacion + " la variable \" " + token.contenido + " \" ya ah sido declarada con anteoridad");
+                }
+                else
+                {
+                    errores.Add("Error en la linea " + token.lineaUbicacion + " se esperaba una asignacion o fin de declaracion");
+                }
                 pila.Push(token.lexema);
             }
             escribirTransicion(token, pila);

@@ -40,10 +40,6 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
                 {
                     temp = new ID_token("ReservatedWord_TOKEN", token.contenido, token.lineaUbicacion, token.inicioCadena, Color.Green);
                     temp.lexema = temp.contenido.ToUpper();
-                    if (temp.lexema.Equals("LEER"))
-                    {
-                        memoriaAsignacion = "CADENA";
-                    }
                     TOKEN_type.Add(temp);
                 }
                 else
@@ -190,7 +186,14 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
             {
                 if (tok.contenido.Equals(token.contenido))
                 {
-                    return tok.lexema;
+                    if (memoriaAsignacion.Equals(""))
+                    {
+                        return tok.lexema;
+                    }
+                    else
+                    {
+                        return "ID_";
+                    }
                 }
             }
             return "";
