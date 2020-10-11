@@ -72,7 +72,6 @@
     </Compile>
     <Compile Include="ManejoArchivos\Archivos.cs" />
     <Compile Include="Pila\AnalicisSintactico.cs" />
-    <Compile Include="Pila\nodo.cs" />
     <Compile Include="ProcesamientoTexto\SeparadorTexto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +88,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
