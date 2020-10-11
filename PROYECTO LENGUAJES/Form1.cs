@@ -258,7 +258,7 @@ namespace PROYECTO_LENGUAJES
             {
                 realizarCambios = false;
                 int numerolinea = CampoDeTexto.GetLineFromCharIndex(CampoDeTexto.SelectionStart) + 1;
-                Console.WriteLine(numerolinea);
+                //Console.WriteLine(numerolinea);
                 editadoDeTextoPorLinea(numerolinea);
                 realizarCambios = true;
             }

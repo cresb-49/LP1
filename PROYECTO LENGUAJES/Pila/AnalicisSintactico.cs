@@ -188,6 +188,10 @@ namespace PROYECTO_LENGUAJES.Pila
                     NUM(token, pila);
                     respuesta = true;
                     break;
+                case "NUM2":
+                    NUM2(token, pila);
+                    respuesta = true;
+                    break;
                 case "ASIG":
                     ASIG(token, pila);
                     respuesta = true;
@@ -316,7 +320,7 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("}");
                 pila.Push("1");
                 pila.Push("{");
-                pila.Push("ASIG_P");
+                pila.Push("ASIG_EP2");
                 pila.Push("INCREMENTO");
                 pila.Push("LOGICA");
                 pila.Push("HASTA");
@@ -411,14 +415,14 @@ namespace PROYECTO_LENGUAJES.Pila
             if (token.lexema.Equals("ID_ENTERO"))
             {
                 pila.Pop();
-                pila.Push("ASIG_P");
+                pila.Push("ASIG_EP2");
                 pila.Push("=");
                 pila.Push("ID_ENTERO");
             } 
             else if (token.lexema.Equals("ENTERO"))
             {
                 pila.Pop();
-                pila.Push("ASIG_P");
+                pila.Push("ASIG_EP2");
                 pila.Push("=");
                 pila.Push("ID_ENTERO");
                 pila.Push("ENTERO");
@@ -459,13 +463,13 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("LOGICA2");
                 pila.Push("ESTADO_LOGICO");
             }
-            else if (token.lexema.Equals("NUMERO_E")|| token.lexema.Equals("NUMERO_D") || token.lexema.Equals("ID_ENTERO") || token.lexema.Equals("ID_DECIMAL"))
+            else if (token.lexema.Equals("NUMERO_E")|| token.lexema.Equals("NUMERO_D") || token.lexema.Equals("ID_ENTERO") || token.lexema.Equals("ID_DECIMAL") || token.lexema.Equals("-"))
             {
                 pila.Pop();
                 pila.Push("LOGICA2");
-                pila.Push("NUM");
+                pila.Push("NUM2");
                 pila.Push("OP_RELACIONAL");
-                pila.Push("NUM");
+                pila.Push("NUM2");
             }
             else if (token.contenido.Equals("!"))
             {
@@ -473,6 +477,14 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("LOGICA2");
                 pila.Push("LOGICA");
                 pila.Push("!");
+            }
+            else if (token.lexema.Equals("("))
+            {
+                pila.Pop();
+                pila.Push("LOGICA2");
+                pila.Push(")");
+                pila.Push("LOGICA");
+                pila.Push("(");
             }
             else
             {
@@ -497,16 +509,25 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("LOGICA");
                 pila.Push("||");
             }
-            else if (token.lexema.Equals(")")){
+            else
+            {
                 pila.Pop();
+            }
+            escribirTransicion(token, pila);
+        }
+        private void NUM2(ID_token token, Stack<String> pila)
+        {
+            if (token.lexema.Equals("-"))
+            {
+                pila.Pop();
+                pila.Push("NUM");
+                pila.Push("-");
             }
             else
             {
-                erroresSintaxis.Add("Error en la linea " + token.lineaUbicacion + " \""+token.contenido+"\" se esperaba una identacion booleana");
                 pila.Pop();
-                pila.Push(token.lexema);
+                pila.Push("NUM");
             }
-            escribirTransicion(token, pila);
         }
         private void NUM(ID_token token, Stack<String> pila)
         {
