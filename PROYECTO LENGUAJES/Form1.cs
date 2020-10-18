@@ -317,12 +317,44 @@ namespace PROYECTO_LENGUAJES
         public void ubiCursor()
         {
             int pos = this.CampoDeTexto.SelectionStart;
-            
-
-            
-            
             LabelUbiCursor.Text = pos.ToString();
             Console.WriteLine("Ubicacion cursor: " + pos);
+        }
+
+        private void eliminarDocumentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CurrentFileSource.Equals(""))
+            {
+                MessageBox.Show("No hay un archivo abierto");
+            }
+            else
+            {
+                if (MessageBox.Show("¿Quieres elminar el documento en curso?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        File.Delete(CurrentFileSource);
+                        if (File.Exists(CurrentFileSource))
+                        {
+                            Console.WriteLine("El archivo sigue existiendo.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("El archivo ya no existe.");
+                            CampoDeTexto.Enabled = false;
+                            CampoDeTexto.Text = "";
+                            logText.Text = "";
+                            CurrentFileSource = "";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error al borrar archivo: {0}", ex.ToString());
+                    }
+                }
+            }
+                
+                
         }
     }
 }
