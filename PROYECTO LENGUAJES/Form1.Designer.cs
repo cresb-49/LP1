@@ -49,9 +49,9 @@
             this.buttonExportar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.UbicacionCarrete = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.LabelUbiCursor = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.UbicacionCarrete = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -156,8 +156,8 @@
             // compilarToolStripMenuItem
             // 
             this.compilarToolStripMenuItem.Name = "compilarToolStripMenuItem";
-            this.compilarToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.compilarToolStripMenuItem.Text = "Compilar";
+            this.compilarToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.compilarToolStripMenuItem.Text = "Analizar";
             this.compilarToolStripMenuItem.Click += new System.EventHandler(this.compilarToolStripMenuItem_Click);
             // 
             // pictureBox1
@@ -230,6 +230,24 @@
             this.panel1.TabIndex = 3;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
+            // LabelUbiCursor
+            // 
+            this.LabelUbiCursor.AutoSize = true;
+            this.LabelUbiCursor.Location = new System.Drawing.Point(152, 11);
+            this.LabelUbiCursor.Name = "LabelUbiCursor";
+            this.LabelUbiCursor.Size = new System.Drawing.Size(13, 13);
+            this.LabelUbiCursor.TabIndex = 4;
+            this.LabelUbiCursor.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(112, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Cursor: ";
+            // 
             // UbicacionCarrete
             // 
             this.UbicacionCarrete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -241,24 +259,6 @@
             this.UbicacionCarrete.Size = new System.Drawing.Size(92, 13);
             this.UbicacionCarrete.TabIndex = 2;
             this.UbicacionCarrete.Text = "Ubicacion: linea 0";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(112, 11);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Cursor: ";
-            // 
-            // LabelUbiCursor
-            // 
-            this.LabelUbiCursor.AutoSize = true;
-            this.LabelUbiCursor.Location = new System.Drawing.Point(152, 11);
-            this.LabelUbiCursor.Name = "LabelUbiCursor";
-            this.LabelUbiCursor.Size = new System.Drawing.Size(13, 13);
-            this.LabelUbiCursor.TabIndex = 4;
-            this.LabelUbiCursor.Text = "0";
             // 
             // GTinsider
             // 
