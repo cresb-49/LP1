@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PROYECTO_LENGUAJES.AFD
 {
@@ -73,7 +69,8 @@ namespace PROYECTO_LENGUAJES.AFD
             {
                 this.state = 1;
                 aceptacion = false;
-            }else if (caracter.Equals("."))
+            }
+            else if (caracter.Equals("."))
             {
                 this.state = 2;
                 aceptacion = false;

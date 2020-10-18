@@ -1,9 +1,8 @@
-﻿using System;
+﻿using PROYECTO_LENGUAJES.Elementos_de_Lengua;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PROYECTO_LENGUAJES.Elementos_de_Lengua;
+using System.Runtime.CompilerServices;
+
 namespace PROYECTO_LENGUAJES.ProcesamientoTexto
 {
     class SeparadorTexto
@@ -11,12 +10,12 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
         private String[] operadoresAritmeticos = new String[] { "+", "-", "*", "/", "++", "--" };
         private String[] operadoresRelacionales = new String[] { ">", "<", ">=", "<=", "==", "!=" };
         private String[] operadoresLogicos = new String[] { "||", "&&", "!" };
-        private String[] signoAgrupacion = new string[] { "(", ")" };
+        private String[] signoAgrupacion = new string[] { "(", ")", "{", "}" };
         private String asignacionDeSentencia = "=";
         private String finalizacionSentencia = ";";
+        private String separadorVarables = ",";
         private String comillas = "\"";
 
-        private int tamanoMax = 0;
 
         public SeparadorTexto()
         {
@@ -35,7 +34,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
         {
             arreglo = arreglo + "  " + "\n";
             List<LOCATION_token> token = new List<LOCATION_token>();
-            
+
             int inicio = 0;
             int fin = 0;
             int legth = arreglo.Length;
@@ -47,16 +46,16 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
             {
                 apuntador1 = arreglo.Substring(i, 1);
                 apuntador2 = arreglo.Substring((i + 1), 1);
-                if(apuntador1.Equals("\n"))
+                if (apuntador1.Equals("\n"))
                 {
                     numeroLinea++;
                 }
 
-                if (!(apuntador1.Equals(" ")|| apuntador1.Equals("\n")|| apuntador1.Equals("\t")) && (apuntador2.Equals(" ")||apuntador2.Equals("\n") || apuntador2.Equals("\t")))
+                if (!(apuntador1.Equals(" ") || apuntador1.Equals("\n") || apuntador1.Equals("\t")) && (apuntador2.Equals(" ") || apuntador2.Equals("\n") || apuntador2.Equals("\t")))
                 {
                     fin = i;
                     String extraccion = extraerTexto(arreglo, inicio, fin);
-                    if (!extraccion.Equals(" ")&& !extraccion.Equals("\n") && !extraccion.Equals("") && !extraccion.Equals("\t"))
+                    if (!extraccion.Equals(" ") && !extraccion.Equals("\n") && !extraccion.Equals("") && !extraccion.Equals("\t"))
                     {
                         if (extraccion.Equals(comillas) || extraccion.StartsWith(comillas))
                         {
@@ -67,17 +66,17 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                             fin = segundaComilla;
                             if (fin < 0)
                             {
-                                fin = saltoDeLinea-1;
+                                fin = saltoDeLinea - 1;
                             }
                             extraccion = extraerTexto(arreglo, inicio, fin);
-                            token.Add(new LOCATION_token(extraccion,numeroLinea,inicio));
-                        
+                            token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
+
                             inicio = fin + 1;
                             i = fin - 1;
                         }
                         else
                         {
-                            token.Add(new LOCATION_token(extraccion, numeroLinea,inicio));
+                            token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
                             if (apuntador2.Equals("\n"))
                             {
                                 inicio = fin + 2;
@@ -89,7 +88,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                         }
                     }
                 }
-                if ((apuntador1.Equals(" ")||apuntador1.Equals("\n") || apuntador1.Equals("\t")) && !(apuntador2.Equals(" ")||apuntador2.Equals("\n") || apuntador2.Equals("\t")))
+                if ((apuntador1.Equals(" ") || apuntador1.Equals("\n") || apuntador1.Equals("\t")) && !(apuntador2.Equals(" ") || apuntador2.Equals("\n") || apuntador2.Equals("\t")))
                 {
                     inicio = i + 1;
                 }
@@ -131,7 +130,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                 }
                 if (saltoPorSignoEspecial(apuntador1) && !(saltoPorSignoEspecial(apuntador2)))
                 {
-                    if (apuntador2.Equals(" ")|| apuntador2.Equals("\n") || apuntador2.Equals("\t"))
+                    if (apuntador2.Equals(" ") || apuntador2.Equals("\n") || apuntador2.Equals("\t"))
                     {
                         if (apuntador2.Equals("\n"))
                         {
@@ -160,7 +159,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                     {
                         inicio = i;
                         fin = arreglo.IndexOf("\n", i);
-                        String extraccion = extraerTexto(arreglo, inicio, fin-1);
+                        String extraccion = extraerTexto(arreglo, inicio, fin - 1);
                         ////Console.WriteLine("aqui 6:" + extraccion + "---");
                         token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
 
@@ -169,11 +168,11 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                     }
                     else
                     {
-                        if(apuntador1.Equals("/") && apuntador2.Equals("*"))
+                        if (apuntador1.Equals("/") && apuntador2.Equals("*"))
                         {
                             int tempNumLinea = numeroLinea;
                             inicio = i;
-                            int ubicacionEspacio=i;
+                            int ubicacionEspacio = i;
                             fin = arreglo.IndexOf("*/", i);
                             if (fin < 0)
                             {
@@ -196,7 +195,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                             String extraccion;
                             if (fin == legth)
                             {
-                                extraccion = extraerTexto(arreglo, inicio, fin-1);
+                                extraccion = extraerTexto(arreglo, inicio, fin - 1);
                             }
                             else
                             {
@@ -205,7 +204,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
 
                             token.Add(new LOCATION_token(extraccion, tempNumLinea, inicio));
                             ////Console.WriteLine("aqui 7:" + extraccion + "---");
-                            i = fin +1;
+                            i = fin + 1;
                             inicio = fin + 3;
                         }
                         else
@@ -214,7 +213,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                             fin = i + 1;
                             String extraccion = extraerTexto(arreglo, inicio, fin);
                             ////Console.WriteLine("aqui 4:" + extraccion + "---");
-                            token.Add(new LOCATION_token(extraccion, numeroLinea,inicio));
+                            token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
                             if (apuntador1.Equals("\n"))
                             {
                                 inicio = i + 3;
@@ -235,7 +234,7 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                         fin = inicio;
                         String extraccion = extraerTexto(arreglo, inicio, fin);
                         ////Console.WriteLine("aqui 5:" + extraccion + "---");
-                        token.Add(new LOCATION_token(extraccion, numeroLinea,inicio));
+                        token.Add(new LOCATION_token(extraccion, numeroLinea, inicio));
                         inicio = i + 1;
                     }
                 }
@@ -334,6 +333,10 @@ namespace PROYECTO_LENGUAJES.ProcesamientoTexto
                 return true;
             }
             if (cadena.Equals(finalizacionSentencia))
+            {
+                return true;
+            }
+            if (cadena.Equals(separadorVarables))
             {
                 return true;
             }

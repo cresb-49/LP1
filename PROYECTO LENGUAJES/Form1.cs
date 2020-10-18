@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
-using PROYECTO_LENGUAJES.ProcesamientoTexto;
-using PROYECTO_LENGUAJES.ManejoArchivos;
-using System.Net.Configuration;
-using PROYECTO_LENGUAJES.Colorear;
+﻿using PROYECTO_LENGUAJES.Colorear;
 using PROYECTO_LENGUAJES.Elementos_de_Lengua;
-using PROYECTO_LENGUAJES.AFD;
-using System.Threading;
+using PROYECTO_LENGUAJES.ManejoArchivos;
+using PROYECTO_LENGUAJES.Pila;
+using PROYECTO_LENGUAJES.ProcesamientoTexto;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace PROYECTO_LENGUAJES
 {
@@ -22,12 +16,12 @@ namespace PROYECTO_LENGUAJES
     {
         private SeparadorTexto clasificadorTexto = new SeparadorTexto();
         private Archivos manejadorArchivos = new Archivos();
-        private String CurrentFileSource="";
+        private String CurrentFileSource = "";
         private ResaltarPalabras resaltarPalabras = new ResaltarPalabras();
         private Boolean realizarCambios = true;
         private Boolean coloreadoSelectivo = false;
         private int carcater;
-        
+
 
         public GTinsider()
         {
@@ -60,18 +54,42 @@ namespace PROYECTO_LENGUAJES
             List<ID_token> recuperacion2 = new List<ID_token>();
             recuperacion2 = identificaion.GetID_Tokens();
 
+            Boolean banderaSintactico = true;
+
             String resultadoCompi = "";
             foreach (ID_token token in recuperacion2)
             {
-                resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
-                resultadoCompi = resultadoCompi+"Token type: " + token.ID+" Linea ubicacion: "+token.lineaUbicacion + "  Contenido: " + token.contenido+"\n";
-                resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
+                if (token.ID.Equals("unknown_TOKEN"))
+                {
+                    resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
+                    resultadoCompi = resultadoCompi + "Token type: " + token.ID + " Lexema: " + token.lexema + " Linea ubicacion: " + token.lineaUbicacion + "  Contenido: " + token.contenido + "\n";
+                    resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
+                    banderaSintactico = false;
+                }
             }
+            if (banderaSintactico)
+            {
+                resultadoCompi = resultadoCompi + "---------------RESULTADO DE ANALISIS SINTACTICO---------------" + "\n";
+                AnalicisSintactico an = new AnalicisSintactico();
+                an.ejecutar(recuperacion2);
+                if (an.errores.Count == 0)
+                {
+                    resultadoCompi = resultadoCompi + "---------------NINGUN FALLO DE GRAMATICA---------------" + "\n";
+                }
+                else
+                {
+                    foreach (String res in an.errores)
+                    {
+                        resultadoCompi = resultadoCompi + res + "\n";
+                    }
+                }
+            }
+            else
+            {
+                resultadoCompi = resultadoCompi + "---------------EXISTEN ERRORES DE ESCRITURA---------------" + "\n";
+            }
+            
             logText.Text = resultadoCompi;
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
 
         }
 
@@ -111,7 +129,7 @@ namespace PROYECTO_LENGUAJES
 
         private void archivosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -147,20 +165,13 @@ namespace PROYECTO_LENGUAJES
             saveFileDialog1.Title = "Guardar Source Code";
             saveFileDialog1.Filter = "Source code (*.gt)|*.gt";
             saveFileDialog1.FileName = "Sin titulo 1";
-            if(saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 String source = saveFileDialog1.FileName;
-                if (File.Exists(source))
-                {
-                    MessageBox.Show("Un archivo ya existe con este nombre");
-                }
-                else
-                {
-                    CampoDeTexto.Enabled = true;
-                    manejadorArchivos.CrearArchivo(source);
-                    this.CurrentFileSource = source;
-                    coloreadoSelectivo = true;
-                }
+                CampoDeTexto.Enabled = true;
+                manejadorArchivos.CrearArchivo(source);
+                this.CurrentFileSource = source;
+                coloreadoSelectivo = true;
             }
         }
 
@@ -199,21 +210,14 @@ namespace PROYECTO_LENGUAJES
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 String source = saveFileDialog1.FileName;
-                if (File.Exists(source))
-                {
-                    MessageBox.Show("Un archivo ya existe con este nombre");
-                }
-                else
-                {
-                    CampoDeTexto.Enabled = true;
-                    manejadorArchivos.ExportarLog(source,lineas);
-                }
+                CampoDeTexto.Enabled = true;
+                manejadorArchivos.ExportarLog(source, lineas);
             }
         }
 
         private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(CampoDeTexto.SelectionLength > 0)
+            if (CampoDeTexto.SelectionLength > 0)
             {
                 CampoDeTexto.Copy();
             }
@@ -240,7 +244,7 @@ namespace PROYECTO_LENGUAJES
             {
                 CampoDeTexto.Cut();
             }
-                
+
         }
 
         private void CampoDeTexto_TextChanged(object sender, EventArgs e)
@@ -249,12 +253,10 @@ namespace PROYECTO_LENGUAJES
             {
                 realizarCambios = false;
                 int numerolinea = CampoDeTexto.GetLineFromCharIndex(CampoDeTexto.SelectionStart) + 1;
-                Console.WriteLine(numerolinea);
                 editadoDeTextoPorLinea(numerolinea);
                 realizarCambios = true;
             }
-            
-            
+            //ubiCursor();
         }
 
         private void editadoDeTexto()
@@ -279,7 +281,7 @@ namespace PROYECTO_LENGUAJES
             identificaion.clsificarTokens(recuperacion);
             List<ID_token> recuperacion2 = new List<ID_token>();
             recuperacion2 = identificaion.GetID_Tokens();
-            resaltarPalabras.colorearTextoSegunLinea(CampoDeTexto, recuperacion2,linea);
+            resaltarPalabras.colorearTextoSegunLinea(CampoDeTexto, recuperacion2, linea);
             textoCompiLog(recuperacion2);
         }
         private void textoCompiLog(List<ID_token> tokens)
@@ -290,7 +292,7 @@ namespace PROYECTO_LENGUAJES
                 if (item.ID.Equals("unknown_TOKEN"))
                 {
                     reportes = reportes + "-----------------------------------------------------------------------------------------------------------------------\n";
-                    reportes = reportes + ("Token type: " + item.ID + " Linea ubicacion: " + item.lineaUbicacion + "  Contenido: " + item.contenido) + "\n";
+                    reportes = reportes + ("Token type: " + item.ID +" Lexema: "+item.lexema+ " Linea ubicacion: " + item.lineaUbicacion + "  Contenido: " + item.contenido) + "\n";
                     reportes = reportes + "-----------------------------------------------------------------------------------------------------------------------\n";
                 }
             }
@@ -303,7 +305,24 @@ namespace PROYECTO_LENGUAJES
 
         private void CampoDeTexto_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+            ubiCursor();
+        }
+
+        private void GTinsider_KeyUp(object sender, KeyEventArgs e)
+        {
             
+            
+        }
+
+        public void ubiCursor()
+        {
+            int pos = this.CampoDeTexto.SelectionStart;
+            
+
+            
+            
+            LabelUbiCursor.Text = pos.ToString();
+            Console.WriteLine("Ubicacion cursor: " + pos);
         }
     }
 }

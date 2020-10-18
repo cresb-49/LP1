@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 
@@ -21,7 +17,8 @@ namespace PROYECTO_LENGUAJES.ManejoArchivos
             {
                 escritura.Write(texto);
                 escritura.Flush();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
@@ -31,21 +28,21 @@ namespace PROYECTO_LENGUAJES.ManejoArchivos
             }
         }
         public void CrearArchivo(String src)
-        {   
+        {
             try
             {
                 StreamWriter crear = File.CreateText(src);
                 crear.Flush();
                 crear.Close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
         }
         public String LecturaArchivo(String src)
         {
-            String archivoLeido="";
+            String archivoLeido = "";
             TextReader lecturaArchivo = new StreamReader(src);
             try
             {
