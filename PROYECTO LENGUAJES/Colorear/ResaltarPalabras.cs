@@ -12,6 +12,7 @@ namespace PROYECTO_LENGUAJES.Colorear
         //Este metodo solo se utliza al principio cuando se carga el docuemento a editar
         public void colorearTexto(RichTextBox campoDeTexto, List<ID_token> tokens)
         {
+                
             //posicion donde se encuntra el apuntador antes de iniciar el metodo
             int pos = campoDeTexto.SelectionStart;
             foreach (ID_token cadena in tokens)

@@ -71,10 +71,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="ManejoArchivos\Archivos.cs" />
-    <Compile Include="Pila\AnalicisSintactico.cs" />
+    <Compile Include="Sintactico\AnalicisSintactico.cs" />
     <Compile Include="ProcesamientoTexto\SeparadorTexto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sintactico\AsignacionVar.cs" />
+    <Compile Include="Sintactico\ExprecionesLogicas.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

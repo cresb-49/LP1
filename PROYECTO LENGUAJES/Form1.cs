@@ -93,11 +93,6 @@ namespace PROYECTO_LENGUAJES
 
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -258,12 +253,10 @@ namespace PROYECTO_LENGUAJES
             {
                 realizarCambios = false;
                 int numerolinea = CampoDeTexto.GetLineFromCharIndex(CampoDeTexto.SelectionStart) + 1;
-                //Console.WriteLine(numerolinea);
                 editadoDeTextoPorLinea(numerolinea);
                 realizarCambios = true;
             }
-
-
+            //ubiCursor();
         }
 
         private void editadoDeTexto()
@@ -312,7 +305,24 @@ namespace PROYECTO_LENGUAJES
 
         private void CampoDeTexto_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+            ubiCursor();
+        }
 
+        private void GTinsider_KeyUp(object sender, KeyEventArgs e)
+        {
+            
+            
+        }
+
+        public void ubiCursor()
+        {
+            int pos = this.CampoDeTexto.SelectionStart;
+            
+
+            
+            
+            LabelUbiCursor.Text = pos.ToString();
+            Console.WriteLine("Ubicacion cursor: " + pos);
         }
     }
 }

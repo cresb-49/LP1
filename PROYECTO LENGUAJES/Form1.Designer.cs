@@ -50,6 +50,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.UbicacionCarrete = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.LabelUbiCursor = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -217,6 +219,8 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.panel1.Controls.Add(this.LabelUbiCursor);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.UbicacionCarrete);
             this.panel1.Controls.Add(this.buttonExportar);
             this.panel1.Controls.Add(this.label1);
@@ -224,7 +228,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(992, 37);
             this.panel1.TabIndex = 3;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // UbicacionCarrete
             // 
@@ -237,6 +241,24 @@
             this.UbicacionCarrete.Size = new System.Drawing.Size(92, 13);
             this.UbicacionCarrete.TabIndex = 2;
             this.UbicacionCarrete.Text = "Ubicacion: linea 0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(112, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Cursor: ";
+            // 
+            // LabelUbiCursor
+            // 
+            this.LabelUbiCursor.AutoSize = true;
+            this.LabelUbiCursor.Location = new System.Drawing.Point(152, 11);
+            this.LabelUbiCursor.Name = "LabelUbiCursor";
+            this.LabelUbiCursor.Size = new System.Drawing.Size(13, 13);
+            this.LabelUbiCursor.TabIndex = 4;
+            this.LabelUbiCursor.Text = "0";
             // 
             // GTinsider
             // 
@@ -255,6 +277,7 @@
             this.Name = "GTinsider";
             this.Text = ".GTinsider";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GTinsider_KeyUp);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -287,6 +310,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label UbicacionCarrete;
+        private System.Windows.Forms.Label LabelUbiCursor;
+        private System.Windows.Forms.Label label2;
     }
 }
 
