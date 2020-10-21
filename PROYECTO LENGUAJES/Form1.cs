@@ -127,6 +127,18 @@ namespace PROYECTO_LENGUAJES
             }
         }
 
+        private void abrirgtE()
+        {
+            openFileDialog1.Title = "Abrir resultado de Analisis";
+            openFileDialog1.Filter = "Source code (*.gtE)|*.gtE";
+            openFileDialog1.ShowDialog();
+            String src = openFileDialog1.FileName;
+            if (File.Exists(src))
+            {
+
+            }
+        }
+
         private void archivosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -355,6 +367,11 @@ namespace PROYECTO_LENGUAJES
             }
                 
                 
+        }
+
+        private void leerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            abrirgtE();
         }
     }
 }

@@ -36,6 +36,7 @@
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarDocumentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.edicionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pegarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +53,7 @@
             this.LabelUbiCursor = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.UbicacionCarrete = new System.Windows.Forms.Label();
-            this.eliminarDocumentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.leerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -84,7 +85,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivosToolStripMenuItem,
             this.edicionToolStripMenuItem,
-            this.compilarToolStripMenuItem});
+            this.compilarToolStripMenuItem,
+            this.leerToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1043, 24);
@@ -124,6 +126,13 @@
             this.guardarToolStripMenuItem.Text = "Guardar";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
+            // eliminarDocumentoToolStripMenuItem
+            // 
+            this.eliminarDocumentoToolStripMenuItem.Name = "eliminarDocumentoToolStripMenuItem";
+            this.eliminarDocumentoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.eliminarDocumentoToolStripMenuItem.Text = "Eliminar Documento";
+            this.eliminarDocumentoToolStripMenuItem.Click += new System.EventHandler(this.eliminarDocumentoToolStripMenuItem_Click);
+            // 
             // edicionToolStripMenuItem
             // 
             this.edicionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -137,21 +146,21 @@
             // copiarToolStripMenuItem
             // 
             this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
-            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.copiarToolStripMenuItem.Text = "Copiar";
             this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
             // 
             // pegarToolStripMenuItem
             // 
             this.pegarToolStripMenuItem.Name = "pegarToolStripMenuItem";
-            this.pegarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pegarToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.pegarToolStripMenuItem.Text = "Pegar";
             this.pegarToolStripMenuItem.Click += new System.EventHandler(this.pegarToolStripMenuItem_Click);
             // 
             // cortarToolStripMenuItem
             // 
             this.cortarToolStripMenuItem.Name = "cortarToolStripMenuItem";
-            this.cortarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cortarToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.cortarToolStripMenuItem.Text = "Cortar";
             this.cortarToolStripMenuItem.Click += new System.EventHandler(this.cortarToolStripMenuItem_Click);
             // 
@@ -262,12 +271,12 @@
             this.UbicacionCarrete.TabIndex = 2;
             this.UbicacionCarrete.Text = "Ubicacion: linea 0";
             // 
-            // eliminarDocumentoToolStripMenuItem
+            // leerToolStripMenuItem
             // 
-            this.eliminarDocumentoToolStripMenuItem.Name = "eliminarDocumentoToolStripMenuItem";
-            this.eliminarDocumentoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.eliminarDocumentoToolStripMenuItem.Text = "Eliminar Documento";
-            this.eliminarDocumentoToolStripMenuItem.Click += new System.EventHandler(this.eliminarDocumentoToolStripMenuItem_Click);
+            this.leerToolStripMenuItem.Name = "leerToolStripMenuItem";
+            this.leerToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.leerToolStripMenuItem.Text = "Leer .gtE";
+            this.leerToolStripMenuItem.Click += new System.EventHandler(this.leerToolStripMenuItem_Click);
             // 
             // GTinsider
             // 
@@ -322,6 +331,7 @@
         private System.Windows.Forms.Label LabelUbiCursor;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem eliminarDocumentoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem leerToolStripMenuItem;
     }
 }
 
