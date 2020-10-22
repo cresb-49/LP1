@@ -42,6 +42,7 @@
             this.pegarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cortarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compilarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.leerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -53,7 +54,6 @@
             this.LabelUbiCursor = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.UbicacionCarrete = new System.Windows.Forms.Label();
-            this.leerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -171,6 +171,13 @@
             this.compilarToolStripMenuItem.Text = "Analizar";
             this.compilarToolStripMenuItem.Click += new System.EventHandler(this.compilarToolStripMenuItem_Click);
             // 
+            // leerToolStripMenuItem
+            // 
+            this.leerToolStripMenuItem.Name = "leerToolStripMenuItem";
+            this.leerToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.leerToolStripMenuItem.Text = "Leer .gtE";
+            this.leerToolStripMenuItem.Click += new System.EventHandler(this.leerToolStripMenuItem_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -270,13 +277,6 @@
             this.UbicacionCarrete.Size = new System.Drawing.Size(92, 13);
             this.UbicacionCarrete.TabIndex = 2;
             this.UbicacionCarrete.Text = "Ubicacion: linea 0";
-            // 
-            // leerToolStripMenuItem
-            // 
-            this.leerToolStripMenuItem.Name = "leerToolStripMenuItem";
-            this.leerToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.leerToolStripMenuItem.Text = "Leer .gtE";
-            this.leerToolStripMenuItem.Click += new System.EventHandler(this.leerToolStripMenuItem_Click);
             // 
             // GTinsider
             // 

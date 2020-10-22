@@ -1,5 +1,6 @@
 ﻿using PROYECTO_LENGUAJES.Colorear;
 using PROYECTO_LENGUAJES.Elementos_de_Lengua;
+using PROYECTO_LENGUAJES.Formularios;
 using PROYECTO_LENGUAJES.ManejoArchivos;
 using PROYECTO_LENGUAJES.Pila;
 using PROYECTO_LENGUAJES.ProcesamientoTexto;
@@ -135,7 +136,9 @@ namespace PROYECTO_LENGUAJES
             String src = openFileDialog1.FileName;
             if (File.Exists(src))
             {
-
+                VisualizarGTE leerGTE = new VisualizarGTE(src);
+                leerGTE.ShowDialog();
+                //leerGTE.TopMost = true;
             }
         }
 
