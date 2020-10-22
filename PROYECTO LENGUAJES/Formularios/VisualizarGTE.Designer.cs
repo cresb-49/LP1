@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisualizarGTE));
             this.richTextBoxMostrarDoc = new System.Windows.Forms.RichTextBox();
             this.buttonCerrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -61,6 +62,7 @@
             this.ClientSize = new System.Drawing.Size(800, 429);
             this.Controls.Add(this.buttonCerrar);
             this.Controls.Add(this.richTextBoxMostrarDoc);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VisualizarGTE";
             this.Text = "VisualizarGTE";
             this.ResumeLayout(false);
