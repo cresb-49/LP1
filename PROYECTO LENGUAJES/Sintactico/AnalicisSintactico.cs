@@ -1,5 +1,6 @@
 ﻿using PROYECTO_LENGUAJES.Elementos_de_Lengua;
 using PROYECTO_LENGUAJES.Sintactico;
+using PROYECTO_LENGUAJES.ArbolSintactico;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,7 @@ namespace PROYECTO_LENGUAJES.Pila
     class AnalicisSintactico
     {
         private List<String> erroresSintaxis = new List<String>();
+        private Arbol arbolSintactico = new Arbol();
 
         private String[] estadosTerminales = {"PRICIPAL","(",")","{","}","-","+","--","++","/","*","ENTERO","DECIMAL","BOOLEANO","CARACTER","CADENA","ID_ENTERO", "ID_DECIMAL", "ID_BOOLEANO",
                                                 "ID_CARACTER", "ID_CADENA","NUMERO_E","NUMERO_D","CAD_TEXTO",";","=","VERDADERO","FALSO","SI","MIENTRAS","HACER","DESDE",
