@@ -12,7 +12,7 @@ namespace PROYECTO_LENGUAJES.ArbolSintactico
     {
         private int _numero;
         private Nodo _padre;
-        private List<Nodo> _hijos;
+        private List<Nodo> _hijos = new List<Nodo>();
         private String _nombre;
         public Nodo()
         {

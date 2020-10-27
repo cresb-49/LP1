@@ -25,10 +25,38 @@ namespace PROYECTO_LENGUAJES.ArbolSintactico
         }
         public void agregarNodo(String nombre)
         {
+            Console.WriteLine("Agregando el nodo: " + nombre);
             Nodo tmp;
             tmp = new Nodo(numeroDeNodo, this.raizTemporal, nombre);
             this.nodos.Add(tmp);
+            this.raizTemporal.hijos.Add(tmp);
             sumarNodo();
+        }
+        public void escalarArbol()
+        {
+            Nodo tmp = this.raizTemporal;
+            if (tmp.padre == null)
+            {
+                raizTemporal = tmp;
+            }
+            else
+            {
+                raizTemporal = tmp.padre;
+            }
+        }
+        public Nodo retornarNodo(String nombre)
+        {
+            Nodo tmp = null;
+            Console.WriteLine("Nodo buscado: " + nombre);
+            foreach (Nodo nodo in this.raizTemporal.hijos)
+            {
+                if (nodo.nombre.Equals(nombre))
+                {
+                    Console.WriteLine("Nodo encontardo: " + nodo.nombre);
+                    tmp = nodo;
+                }
+            }
+            return tmp;
         }
         public void sumarNodo()
         {
@@ -54,5 +82,6 @@ namespace PROYECTO_LENGUAJES.ArbolSintactico
             GenerarDOT generar = new GenerarDOT();
             return generar.archivoDOT(this);
         }
+        
     }
 }

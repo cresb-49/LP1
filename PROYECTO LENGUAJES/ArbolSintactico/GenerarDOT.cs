@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace PROYECTO_LENGUAJES.ArbolSintactico
 {
@@ -30,5 +27,14 @@ namespace PROYECTO_LENGUAJES.ArbolSintactico
             doc = doc + "}\n";
             return doc;
         }
+        public void generarGrafico()
+        {
+            String fileInputPath = "C:\\temp\\grafo.dot";
+            String fileOutputPath = "C:\\temp\\grafo.png";
+            ProcessStartInfo startInfo = new ProcessStartInfo("dot.exe");
+            startInfo.Arguments = "-Tpng "+fileInputPath+" -o "+fileOutputPath;
+            Process.Start(startInfo);
+        }
+        
     }
 }

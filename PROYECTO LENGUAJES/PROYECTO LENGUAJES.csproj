@@ -73,6 +73,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\VisualizarArbol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\VisualizarArbol.Designer.cs">
+      <DependentUpon>VisualizarArbol.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\VisualizarGTE.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     <Compile Include="Sintactico\ExprecionesLogicas.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\VisualizarArbol.resx">
+      <DependentUpon>VisualizarArbol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\VisualizarGTE.resx">
       <DependentUpon>VisualizarGTE.cs</DependentUpon>

@@ -23,6 +23,7 @@ namespace PROYECTO_LENGUAJES
         private Boolean realizarCambios = true;
         private Boolean coloreadoSelectivo = false;
         private int carcater;
+        private GenerarDOT generarGrafico = new GenerarDOT();
 
 
         public GTinsider()
@@ -83,6 +84,8 @@ namespace PROYECTO_LENGUAJES
                     resultadoCompi = resultadoCompi + "-----------GENERANDO DOT DE ARBOL SINTACTICO-----------" + "\n";
                     resultadoCompi = resultadoCompi + arbolSintactico.recuperarDOT();
 
+                    manejadorArchivos.EscrituraArchivo("C:\\temp\\grafo.dot", arbolSintactico.recuperarDOT());
+                    generarGrafico.generarGrafico();
                 }
                 else
                 {

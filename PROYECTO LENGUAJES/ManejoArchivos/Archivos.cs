@@ -78,6 +78,5 @@ namespace PROYECTO_LENGUAJES.ManejoArchivos
                 escritura.Close();
             }
         }
-
     }
 }
