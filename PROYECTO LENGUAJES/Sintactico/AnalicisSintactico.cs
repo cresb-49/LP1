@@ -46,9 +46,11 @@ namespace PROYECTO_LENGUAJES.Pila
                 fin.lexema = "$";
                 tokes.Add(fin);
                 Stack<String> pila = new Stack<String>();
-
                 pila.Push("$");
                 pila.Push("0");
+                //Agregacion de la raiz del arbol sintactico
+                arbolSintactico.inicio();
+                ///////////////////////////////////////////
                 ID_token token;
                 Boolean res=false;
                 for(int j = 0; j < tokes.Count; j++)
@@ -248,6 +250,13 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push(")");
                 pila.Push("(");
                 pila.Push("PRINCIPAL");
+
+                arbolSintactico.agregarNodo("PRINCIPAL");
+                arbolSintactico.agregarNodo("(");
+                arbolSintactico.agregarNodo(")");
+                arbolSintactico.agregarNodo("{");
+                arbolSintactico.agregarNodo("estado1");
+                arbolSintactico.agregarNodo("}");
             }
             else
             {
@@ -561,6 +570,11 @@ namespace PROYECTO_LENGUAJES.Pila
             {
                 Console.WriteLine("Estado: " + pila.Peek() + " Lexema: " + token.lexema);
             }
+        }
+
+        public Arbol retornarArbol
+        {
+            get { return arbolSintactico; }
         }
     }
 }

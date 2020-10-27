@@ -18,7 +18,12 @@ namespace PROYECTO_LENGUAJES.ArbolSintactico
         {
 
         }
-        
+        public Nodo(int numero, Nodo padre,String nombre)
+        {
+            this.numero = numero;
+            this.padre = padre;
+            this.nombre = nombre;
+        }
         public int numero
         {
             get { return _numero; }

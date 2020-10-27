@@ -1,4 +1,5 @@
-﻿using PROYECTO_LENGUAJES.Colorear;
+﻿using PROYECTO_LENGUAJES.ArbolSintactico;
+using PROYECTO_LENGUAJES.Colorear;
 using PROYECTO_LENGUAJES.Elementos_de_Lengua;
 using PROYECTO_LENGUAJES.Formularios;
 using PROYECTO_LENGUAJES.ManejoArchivos;
@@ -73,9 +74,15 @@ namespace PROYECTO_LENGUAJES
                 resultadoCompi = resultadoCompi + "---------------RESULTADO DE ANALISIS SINTACTICO---------------" + "\n";
                 AnalicisSintactico an = new AnalicisSintactico();
                 an.ejecutar(recuperacion2);
+
+                Arbol arbolSintactico = an.retornarArbol;
+
                 if (an.errores.Count == 0)
                 {
                     resultadoCompi = resultadoCompi + "---------------NINGUN FALLO DE GRAMATICA---------------" + "\n";
+                    resultadoCompi = resultadoCompi + "-----------GENERANDO DOT DE ARBOL SINTACTICO-----------" + "\n";
+                    resultadoCompi = resultadoCompi + arbolSintactico.recuperarDOT();
+
                 }
                 else
                 {
