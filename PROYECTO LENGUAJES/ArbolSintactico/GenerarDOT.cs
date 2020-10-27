@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using PROYECTO_LENGUAJES.ManejoArchivos;
 
 namespace PROYECTO_LENGUAJES.ArbolSintactico
 {
     class GenerarDOT
     {
+        private Archivos manejadorArchivos = new Archivos();
         public GenerarDOT()
         {
 
@@ -31,6 +34,15 @@ namespace PROYECTO_LENGUAJES.ArbolSintactico
         {
             String fileInputPath = "C:\\temp\\grafo.dot";
             String fileOutputPath = "C:\\temp\\grafo.png";
+
+            try
+            {
+                File.Delete(fileOutputPath);
+            }
+            catch (Exception e)
+            {
+            }
+
             ProcessStartInfo startInfo = new ProcessStartInfo("dot.exe");
             startInfo.Arguments = "-Tpng "+fileInputPath+" -o "+fileOutputPath;
             Process.Start(startInfo);

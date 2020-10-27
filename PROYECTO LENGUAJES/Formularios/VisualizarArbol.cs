@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace PROYECTO_LENGUAJES.Formularios
 {
@@ -19,7 +20,12 @@ namespace PROYECTO_LENGUAJES.Formularios
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Dispose();
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = System.Drawing.Image.FromFile("C:\\temp\\grafo.png");
         }
     }
 }

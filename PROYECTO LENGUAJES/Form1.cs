@@ -86,6 +86,8 @@ namespace PROYECTO_LENGUAJES
 
                     manejadorArchivos.EscrituraArchivo("C:\\temp\\grafo.dot", arbolSintactico.recuperarDOT());
                     generarGrafico.generarGrafico();
+                    VisualizarArbol verArbol = new VisualizarArbol();
+                    verArbol.ShowDialog();
                 }
                 else
                 {
