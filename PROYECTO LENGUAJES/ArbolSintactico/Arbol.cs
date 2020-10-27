@@ -44,6 +44,23 @@ namespace PROYECTO_LENGUAJES.ArbolSintactico
                 raizTemporal = tmp.padre;
             }
         }
+        public Nodo retornarNodoEstado1N(int cantidad)
+        {
+            int temp=0;
+            foreach (Nodo nodo in nodos)
+            {
+                if (nodo.nombre.Equals("estado1"))
+                {
+                    temp++;
+
+                    if (temp == cantidad)
+                    {
+                        return nodo;
+                    }
+                }
+            }
+            return null;
+        }
         public Nodo retornarNodo(String nombre)
         {
             Nodo tmp = null;

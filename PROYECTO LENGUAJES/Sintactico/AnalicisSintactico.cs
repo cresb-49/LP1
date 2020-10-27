@@ -105,15 +105,21 @@ namespace PROYECTO_LENGUAJES.Pila
             Nodo temp = arbolSintactico.retornarNodo(pila.Peek());
             if (temp != null)
             {
-                arbolSintactico.raizTemporal = temp;
+                if (temp.nombre.Equals("estado1"))
+                {
+                    int cantidad = contarEstados1(pila);
+                    Console.WriteLine("Cantidad de Estados1: " + cantidad);
+                    arbolSintactico.raizTemporal = arbolSintactico.retornarNodoEstado1N(cantidad);
+                }
+                else
+                {
+                    arbolSintactico.raizTemporal = temp;
+                }
             }
             else
             {
-                if (pila.Peek().Equals("estado1"))
-                {
-                    arbolSintactico.escalarArbol();
-                    asignacionRaiz(pila);
-                }
+                arbolSintactico.escalarArbol();
+                asignacionRaiz(pila);
             }
         }
         public Boolean shift(ID_token token, Stack<String> pila)
@@ -286,20 +292,23 @@ namespace PROYECTO_LENGUAJES.Pila
         }
         public void estado1(ID_token token, Stack<String> pila)
         {
-            asignacionRaiz(pila);
+            escribirTransicion(token, pila);
             if (token.ID.Equals("Id_TOKEN"))
             {
+                asignacionRaiz(pila);
                 pila.Push("estado2");
                 arbolSintactico.agregarNodo(pila.Peek());
                 asignacionRaiz(pila);
             }else if (token.ID.Equals("VariableType_TOKEN"))
             {
+                asignacionRaiz(pila);
                 pila.Push("estado3");
                 arbolSintactico.agregarNodo(pila.Peek());
                 asignacionRaiz(pila);
             }
             else if (token.ID.Equals("ReservatedWord_TOKEN"))
             {
+                asignacionRaiz(pila);
                 pila.Push("estado4");
                 arbolSintactico.agregarNodo(pila.Peek());
                 asignacionRaiz(pila);
@@ -317,6 +326,7 @@ namespace PROYECTO_LENGUAJES.Pila
         }
         public void estado4(ID_token token, Stack<String> pila)
         {
+            asignacionRaiz(pila);
             if (token.lexema.Equals("MIENTRAS"))
             {
                 pila.Pop();
@@ -339,6 +349,17 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("LOGICA");
                 pila.Push("(");
                 pila.Push("SI");
+
+
+                arbolSintactico.agregarNodo("SI");
+                arbolSintactico.agregarNodo("(");
+                arbolSintactico.agregarNodo("LOGICA");
+                arbolSintactico.agregarNodo(")");
+                arbolSintactico.agregarNodo("{");
+                arbolSintactico.agregarNodo("estado1");
+                arbolSintactico.agregarNodo("}");
+                arbolSintactico.agregarNodo("ES_SI_2");
+
             }
             else if (token.lexema.Equals("HACER"))
             {
@@ -592,6 +613,19 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push(token.lexema);
             }
             escribirTransicion(token, pila);
+        }
+        private int contarEstados1(Stack<String> pila)
+        {
+            int temp = 0;
+
+            foreach(String estado in pila)
+            {
+                if (estado.Equals("estado1"))
+                {
+                    temp++;
+                }
+            }
+            return temp;
         }
         private Boolean isTerminal(String lexema)
         {
