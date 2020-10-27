@@ -27,5 +27,10 @@ namespace PROYECTO_LENGUAJES.Formularios
         {
             pictureBox1.Image = System.Drawing.Image.FromFile("C:\\temp\\grafo.png");
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
