@@ -17,7 +17,7 @@ namespace PROYECTO_LENGUAJES.ArbolSintactico
         public String archivoDOT(Arbol arbol)
         {
             String doc = "";
-            doc = "digraph Arbol{\n";
+            doc = "graph Arbol{\n";
             //Declaracion de los nodos del arbol
             foreach(Nodo nodo in arbol.nodos)
             {

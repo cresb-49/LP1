@@ -62,7 +62,7 @@ namespace PROYECTO_LENGUAJES.ArbolSintactico
             }
             else
             {
-                return this.padre.nombreGraphviz() + " -> " + this.nombreGraphviz();
+                return this.padre.nombreGraphviz() + " -- " + this.nombreGraphviz();
             }
         }
     }
