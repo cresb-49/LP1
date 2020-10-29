@@ -33,13 +33,13 @@ namespace PROYECTO_LENGUAJES.Sintactico
             {
                 pila.Pop();
                 pila.Push("LOGICA2");
-                pila.Push("NUM2");
+                pila.Push("NUM3");
                 pila.Push("OP_RELACIONAL");
                 pila.Push("NUM2");
 
                 arbolSintactico.agregarNodo("NUM2");
                 arbolSintactico.agregarNodo("OP_RELACIONAL");
-                arbolSintactico.agregarNodo("NUM2");
+                arbolSintactico.agregarNodo("NUM3");
                 arbolSintactico.agregarNodo("LOGICA2");
 
             }
@@ -107,6 +107,17 @@ namespace PROYECTO_LENGUAJES.Sintactico
                 pila.Pop();
             }
             escribirTransicion(token, pila);
+        }
+        public void NUM3(ID_token token, Stack<String> pila)
+        {
+            asignacionRaiz(pila);
+            if (token.lexema.Equals("NUMERO_E") || token.lexema.Equals("NUMERO_D") || token.lexema.Equals("ID_ENTERO") || token.lexema.Equals("ID_DECIMAL") || token.lexema.Equals("-"))
+            {
+                pila.Pop();
+                pila.Push("NUM2");
+
+                arbolSintactico.agregarNodo("NUM2");
+            }
         }
         public void NUM2(ID_token token, Stack<String> pila)
         {

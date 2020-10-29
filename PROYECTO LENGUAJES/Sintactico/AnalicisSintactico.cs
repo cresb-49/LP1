@@ -230,6 +230,10 @@ namespace PROYECTO_LENGUAJES.Pila
                     this.expLogicas.NUM2(token, pila);
                     respuesta = true;
                     break;
+                case "NUM3":
+                    this.expLogicas.NUM3(token, pila);
+                    respuesta = true;
+                    break;
                 case "ASIG":
                     ASIG(token, pila);
                     respuesta = true;
