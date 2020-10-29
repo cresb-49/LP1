@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 using PROYECTO_LENGUAJES.ManejoArchivos;
 
 namespace PROYECTO_LENGUAJES.ArbolSintactico
@@ -43,10 +44,17 @@ namespace PROYECTO_LENGUAJES.ArbolSintactico
             {
                 Console.WriteLine("Error: " + e.Message);
             }
-
-            ProcessStartInfo startInfo = new ProcessStartInfo("dot.exe");
-            startInfo.Arguments = "-Tpng "+fileInputPath+" -o "+fileOutputPath;
-            Process.Start(startInfo);
+            try
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo("dot.exe");
+                startInfo.Arguments = "-Tpng " + fileInputPath + " -o " + fileOutputPath;
+                Process.Start(startInfo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Al parecer no tienes instalado Graphviz\nInstalalo para poder utilizar esta funcionalidad ;)", "Funcionalidad Recortada");
+            }
+            
         }
         
     }
