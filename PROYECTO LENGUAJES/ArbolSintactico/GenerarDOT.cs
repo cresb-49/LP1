@@ -41,6 +41,7 @@ namespace PROYECTO_LENGUAJES.ArbolSintactico
             }
             catch (Exception e)
             {
+                Console.WriteLine("Error: " + e.Message);
             }
 
             ProcessStartInfo startInfo = new ProcessStartInfo("dot.exe");

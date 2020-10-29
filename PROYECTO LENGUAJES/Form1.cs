@@ -46,64 +46,77 @@ namespace PROYECTO_LENGUAJES
 
         private void compilarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            buttonExportar.Enabled = true;
-            logText.Lines = null;
-            String texto = CampoDeTexto.Text;
-            //Console.WriteLine(texto);
-            List<LOCATION_token> recuperacion = new List<LOCATION_token>();
-            recuperacion = clasificadorTexto.abstraccionTexto(texto);
-            TOKEN_sorter identificaion = new TOKEN_sorter();
-            identificaion.clsificarTokens(recuperacion);
-            List<ID_token> recuperacion2 = new List<ID_token>();
-            recuperacion2 = identificaion.GetID_Tokens();
-
-            Boolean banderaSintactico = true;
-
-            String resultadoCompi = "";
-            foreach (ID_token token in recuperacion2)
+            if (CurrentFileSource.Length != 0)
             {
-                if (token.ID.Equals("unknown_TOKEN"))
+                buttonExportar.Enabled = true;
+                logText.Lines = null;
+                String texto = CampoDeTexto.Text;
+                
+                List<LOCATION_token> recuperacion = new List<LOCATION_token>();
+                recuperacion = clasificadorTexto.abstraccionTexto(texto);
+                TOKEN_sorter identificaion = new TOKEN_sorter();
+                identificaion.clsificarTokens(recuperacion);
+                List<ID_token> recuperacion2 = new List<ID_token>();
+                recuperacion2 = identificaion.GetID_Tokens();
+
+                Boolean banderaSintactico = true;
+
+                String resultadoCompi = "";
+                foreach (ID_token token in recuperacion2)
                 {
-                    resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
-                    resultadoCompi = resultadoCompi + "Token type: " + token.ID + " Lexema: " + token.lexema + " Linea ubicacion: " + token.lineaUbicacion + "  Contenido: " + token.contenido + "\n";
-                    resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
-                    banderaSintactico = false;
+                    if (token.ID.Equals("unknown_TOKEN"))
+                    {
+                        resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
+                        resultadoCompi = resultadoCompi + "Token type: " + token.ID + " Lexema: " + token.lexema + " Linea ubicacion: " + token.lineaUbicacion + "  Contenido: " + token.contenido + "\n";
+                        resultadoCompi = resultadoCompi + "-----------------------------------------------------------------------------------------------------------------------------\n";
+                        banderaSintactico = false;
+                    }
                 }
-            }
-            if (banderaSintactico)
-            {
-                resultadoCompi = resultadoCompi + "---------------RESULTADO DE ANALISIS SINTACTICO---------------" + "\n";
-                AnalicisSintactico an = new AnalicisSintactico();
-                an.ejecutar(recuperacion2);
-
-                Arbol arbolSintactico = an.retornarArbol;
-
-                if (an.errores.Count == 0)
+                if (banderaSintactico)
                 {
-                    resultadoCompi = resultadoCompi + "---------------NINGUN FALLO DE GRAMATICA---------------" + "\n";
-                    resultadoCompi = resultadoCompi + "-----------GENERANDO DOT DE ARBOL SINTACTICO-----------" + "\n";
-                    resultadoCompi = resultadoCompi + arbolSintactico.recuperarDOT();
+                    resultadoCompi = resultadoCompi + "---------------RESULTADO DE ANALISIS SINTACTICO---------------" + "\n";
+                    AnalicisSintactico an = new AnalicisSintactico();
+                    an.ejecutar(recuperacion2);
 
-                    manejadorArchivos.EscrituraArchivo("C:\\temp\\grafo.dot", arbolSintactico.recuperarDOT());
-                    generarGrafico.generarGrafico();
-                    VisualizarArbol verArbol = new VisualizarArbol();
-                    verArbol.ShowDialog();
+                    Arbol arbolSintactico = an.retornarArbol;
+
+                    if (an.errores.Count == 0)
+                    {
+                        resultadoCompi = resultadoCompi + "---------------NINGUN FALLO DE GRAMATICA---------------" + "\n";
+                        resultadoCompi = resultadoCompi + "-----------GENERANDO DOT DE ARBOL SINTACTICO-----------" + "\n";
+                        resultadoCompi = resultadoCompi + arbolSintactico.recuperarDOT();
+
+                        manejadorArchivos.EscrituraArchivo("C:\\temp\\grafo.dot", arbolSintactico.recuperarDOT());
+                        generarGrafico.generarGrafico();
+
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result;
+                        result = MessageBox.Show("Desea visualizar el arbol generado por su analicis?", "Visualizar Arbol", buttons);
+                        if (result == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            VisualizarArbol verArbol = new VisualizarArbol();
+                            verArbol.ShowDialog();
+                        }
+                    }
+                    else
+                    {
+                        foreach (String res in an.errores)
+                        {
+                            resultadoCompi = resultadoCompi + res + "\n";
+                        }
+                    }
                 }
                 else
                 {
-                    foreach (String res in an.errores)
-                    {
-                        resultadoCompi = resultadoCompi + res + "\n";
-                    }
+                    resultadoCompi = resultadoCompi + "---------------EXISTEN ERRORES DE ESCRITURA---------------" + "\n";
                 }
+
+                logText.Text = resultadoCompi;
             }
             else
             {
-                resultadoCompi = resultadoCompi + "---------------EXISTEN ERRORES DE ESCRITURA---------------" + "\n";
+                MessageBox.Show("No esta trabajando bajo ningun archivo","Error al iniciar analicis");
             }
-            
-            logText.Text = resultadoCompi;
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -144,13 +157,14 @@ namespace PROYECTO_LENGUAJES
         {
             openFileDialog1.Title = "Abrir resultado de Analisis";
             openFileDialog1.Filter = "Source code (*.gtE)|*.gtE";
-            openFileDialog1.ShowDialog();
-            String src = openFileDialog1.FileName;
-            if (File.Exists(src))
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                VisualizarGTE leerGTE = new VisualizarGTE(src);
-                leerGTE.ShowDialog();
-                //leerGTE.TopMost = true;
+                String ubicacion = openFileDialog1.FileName;
+                if (File.Exists(ubicacion))
+                {
+                    VisualizarGTE leerGTE = new VisualizarGTE(ubicacion);
+                    leerGTE.ShowDialog();
+                }
             }
         }
 
@@ -283,7 +297,6 @@ namespace PROYECTO_LENGUAJES
                 editadoDeTextoPorLinea(numerolinea);
                 realizarCambios = true;
             }
-            //ubiCursor();
         }
 
         private void editadoDeTexto()
@@ -345,7 +358,7 @@ namespace PROYECTO_LENGUAJES
         {
             int pos = this.CampoDeTexto.SelectionStart;
             LabelUbiCursor.Text = pos.ToString();
-            Console.WriteLine("Ubicacion cursor: " + pos);
+            //Console.WriteLine("Ubicacion cursor: " + pos);
         }
 
         private void eliminarDocumentoToolStripMenuItem_Click(object sender, EventArgs e)

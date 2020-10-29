@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace PROYECTO_LENGUAJES.Formularios
         public VisualizarArbol()
         {
             InitializeComponent();
+            cargaDeImagen();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -26,7 +28,7 @@ namespace PROYECTO_LENGUAJES.Formularios
 
         private void button2_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = System.Drawing.Image.FromFile("C:\\temp\\grafo.png");
+            //pictureBox1.Image = System.Drawing.Image.FromFile("C:\\temp\\grafo.png");
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -37,7 +39,14 @@ namespace PROYECTO_LENGUAJES.Formularios
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 String source = saveFileDialog1.FileName;
-                File.Copy("C:\\temp\\grafo.png",source);
+                pictureBox1.Image.Save(source, ImageFormat.Png);
+            }
+        }
+        private void cargaDeImagen()
+        {
+            using (Stream str = new FileStream("C:\\temp\\grafo.png",FileMode.Open,FileAccess.Read))
+            {
+                pictureBox1.Image = System.Drawing.Image.FromStream(str);
             }
         }
     }
