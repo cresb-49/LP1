@@ -11,6 +11,7 @@ namespace PROYECTO_LENGUAJES.Elementos_de_Lengua
         private int _lineaUbicacion;
         private int _inicioCadena;
         private Color _colorDeTexto;
+
         public Token(String ID, String lexema, String contenido, int lineaUbicacion, int inicioCadena, Color colorDeTexto)
         {
             this._ID = ID;
