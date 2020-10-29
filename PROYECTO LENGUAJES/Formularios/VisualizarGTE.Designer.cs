@@ -36,6 +36,9 @@
             // richTextBoxMostrarDoc
             // 
             this.richTextBoxMostrarDoc.AcceptsTab = true;
+            this.richTextBoxMostrarDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxMostrarDoc.BackColor = System.Drawing.SystemColors.ControlDark;
             this.richTextBoxMostrarDoc.Location = new System.Drawing.Point(28, 23);
             this.richTextBoxMostrarDoc.Name = "richTextBoxMostrarDoc";
@@ -46,6 +49,7 @@
             // 
             // buttonCerrar
             // 
+            this.buttonCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCerrar.Location = new System.Drawing.Point(671, 394);
             this.buttonCerrar.Name = "buttonCerrar";
             this.buttonCerrar.Size = new System.Drawing.Size(101, 23);

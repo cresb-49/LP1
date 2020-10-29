@@ -353,7 +353,6 @@ namespace PROYECTO_LENGUAJES
             
             
         }
-
         public void ubiCursor()
         {
             int pos = this.CampoDeTexto.SelectionStart;
