@@ -1,25 +1,32 @@
-﻿using PROYECTO_LENGUAJES.Elementos_de_Lengua;
+﻿using PROYECTO_LENGUAJES.ArbolSintactico;
+using PROYECTO_LENGUAJES.Elementos_de_Lengua;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace PROYECTO_LENGUAJES.Sintactico
 {
     class ExprecionesLogicas
     {
-        public ExprecionesLogicas()
+        private Arbol arbolSintactico;
+        public ExprecionesLogicas(Arbol arbol)
         {
-
+            this.arbolSintactico = arbol;
         }
         public void LOGICA(ID_token token, Stack<String> pila, List<String> errores)
         {
+            asignacionRaiz(pila);
             if (token.ID.Equals("BooleanState_TOKEN") || token.lexema.Equals("ID_BOOLEANO"))
             {
                 pila.Pop();
                 pila.Push("LOGICA2");
                 pila.Push("ESTADO_LOGICO");
+
+                arbolSintactico.agregarNodo("ESTADO_LOGICO");
+                arbolSintactico.agregarNodo("LOGICA2");
             }
             else if (token.lexema.Equals("NUMERO_E") || token.lexema.Equals("NUMERO_D") || token.lexema.Equals("ID_ENTERO") || token.lexema.Equals("ID_DECIMAL") || token.lexema.Equals("-"))
             {
@@ -28,6 +35,11 @@ namespace PROYECTO_LENGUAJES.Sintactico
                 pila.Push("NUM2");
                 pila.Push("OP_RELACIONAL");
                 pila.Push("NUM2");
+
+                arbolSintactico.agregarNodo("NUM2");
+                arbolSintactico.agregarNodo("OP_RELACIONAL");
+                arbolSintactico.agregarNodo("NUM2");
+                arbolSintactico.agregarNodo("LOGICA2");
             }
             else if (token.contenido.Equals("!"))
             {
@@ -35,6 +47,10 @@ namespace PROYECTO_LENGUAJES.Sintactico
                 pila.Push("LOGICA2");
                 pila.Push("LOGICA");
                 pila.Push("!");
+
+                arbolSintactico.agregarNodo("!");
+                arbolSintactico.agregarNodo("LOGICA");
+                arbolSintactico.agregarNodo("LOGICA2");
             }
             else if (token.lexema.Equals("("))
             {
@@ -43,6 +59,11 @@ namespace PROYECTO_LENGUAJES.Sintactico
                 pila.Push(")");
                 pila.Push("LOGICA");
                 pila.Push("(");
+
+                arbolSintactico.agregarNodo("(");
+                arbolSintactico.agregarNodo("LOGICA");
+                arbolSintactico.agregarNodo(")");
+                arbolSintactico.agregarNodo("LOGICA2");
             }
             else
             {
@@ -54,17 +75,25 @@ namespace PROYECTO_LENGUAJES.Sintactico
         }
         public void LOGICA2(ID_token token, Stack<String> pila)
         {
+            asignacionRaiz(pila);
             if (token.lexema.Equals("&&"))
             {
                 pila.Pop();
                 pila.Push("LOGICA");
                 pila.Push("&&");
+
+                arbolSintactico.agregarNodo("&&");
+                arbolSintactico.agregarNodo("LOGICA");
+
             }
             else if (token.lexema.Equals("||"))
             {
                 pila.Pop();
                 pila.Push("LOGICA");
                 pila.Push("||");
+
+                arbolSintactico.agregarNodo("||");
+                arbolSintactico.agregarNodo("LOGICA");
             }
             else
             {
@@ -74,39 +103,54 @@ namespace PROYECTO_LENGUAJES.Sintactico
         }
         public void NUM2(ID_token token, Stack<String> pila)
         {
+            asignacionRaiz(pila);
             if (token.lexema.Equals("-"))
             {
                 pila.Pop();
                 pila.Push("NUM");
                 pila.Push("-");
+
+                arbolSintactico.agregarNodo("-");
+                arbolSintactico.agregarNodo("NUM");
             }
             else
             {
                 pila.Pop();
                 pila.Push("NUM");
+
+                arbolSintactico.agregarNodo("NUM");
             }
         }
         public void NUM(ID_token token, Stack<String> pila, List<String> errores)
         {
+            asignacionRaiz(pila);
             if (token.lexema.Equals("NUMERO_E"))
             {
                 pila.Pop();
                 pila.Push("NUMERO_E");
+
+                arbolSintactico.agregarNodo(token.lexema);
             }
             else if (token.lexema.Equals("NUMERO_D"))
             {
                 pila.Pop();
                 pila.Push("NUMERO_D");
+
+                arbolSintactico.agregarNodo(token.lexema);
             }
             else if (token.lexema.Equals("ID_ENTERO"))
             {
                 pila.Pop();
                 pila.Push("ID_ENTERO");
+
+                arbolSintactico.agregarNodo(token.lexema);
             }
             else if (token.lexema.Equals("ID_DECIMAL"))
             {
                 pila.Pop();
                 pila.Push("ID_DECIMAL");
+
+                arbolSintactico.agregarNodo(token.lexema);
             }
             else
             {
@@ -118,10 +162,13 @@ namespace PROYECTO_LENGUAJES.Sintactico
         }
         public void ESTADO_LOGICO(ID_token token, Stack<String> pila, List<String> errores)
         {
+            asignacionRaiz(pila);
             if (token.lexema.Equals("VERDADERO"))
             {
                 pila.Pop();
                 pila.Push("VERDADERO");
+
+                arbolSintactico.agregarNodo(token.lexema);
 
             }
             else if (token.lexema.Equals("FALSO"))
@@ -129,11 +176,15 @@ namespace PROYECTO_LENGUAJES.Sintactico
                 pila.Pop();
                 pila.Push("FALSO");
 
+                arbolSintactico.agregarNodo(token.lexema);
+
             }
             else if (token.lexema.Equals("ID_BOOLEANO"))
             {
                 pila.Pop();
                 pila.Push("ID_BOOLEANO");
+
+                arbolSintactico.agregarNodo(token.lexema);
             }
             else
             {
@@ -148,6 +199,15 @@ namespace PROYECTO_LENGUAJES.Sintactico
             if (pila.Count > 0)
             {
                 Console.WriteLine("Estado: " + pila.Peek() + " Lexema: " + token.lexema);
+            }
+        }
+        private void asignacionRaiz(Stack<String> pila)
+        {
+            Nodo temp = arbolSintactico.retornarNodo(pila.Peek());
+            //Console.WriteLine("Busquedad de nodo: " + pila.Peek() + " resultado: "+temp.nombre);
+            if (temp != null)
+            {
+                arbolSintactico.raizTemporal = temp;
             }
         }
     }

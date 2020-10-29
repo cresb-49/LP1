@@ -27,7 +27,7 @@ namespace PROYECTO_LENGUAJES.Pila
 
         //CLASE RESPECTIVA A LA ASIGNACION DE VARIABLES
         private AsignacionVar asignacionVariables;
-        private ExprecionesLogicas expLogicas = new ExprecionesLogicas();
+        private ExprecionesLogicas expLogicas;
 
 
         public AnalicisSintactico()
@@ -52,7 +52,10 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("estado0");
                 //Agregacion de la raiz del arbol sintactico
                 arbolSintactico.inicio();
+
                 asignacionVariables = new AsignacionVar(this.retornarArbol);
+                expLogicas = new ExprecionesLogicas(this.retornarArbol);
+
                 ID_token token;
                 Boolean res=false;
                 for(int j = 0; j < tokes.Count; j++)
@@ -337,6 +340,14 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("LOGICA");
                 pila.Push("(");
                 pila.Push("MIENTRAS");
+
+                arbolSintactico.agregarNodo("MIENTRAS");
+                arbolSintactico.agregarNodo("(");
+                arbolSintactico.agregarNodo("LOGICA");
+                arbolSintactico.agregarNodo(")");
+                arbolSintactico.agregarNodo("{");
+                arbolSintactico.agregarNodo("estado1");
+                arbolSintactico.agregarNodo("}");
             }
             else if (token.lexema.Equals("SI"))
             {
@@ -372,6 +383,16 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("estado1");
                 pila.Push("{");
                 pila.Push("HACER");
+
+                arbolSintactico.agregarNodo("HACER");
+                arbolSintactico.agregarNodo("{");
+                arbolSintactico.agregarNodo("estado1");
+                arbolSintactico.agregarNodo("}");
+                arbolSintactico.agregarNodo("MIENTRAS");
+                arbolSintactico.agregarNodo("(");
+                arbolSintactico.agregarNodo("LOGICA");
+                arbolSintactico.agregarNodo(")");
+
             }
             else if (token.lexema.Equals("DESDE"))
             {
@@ -385,6 +406,17 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("HASTA");
                 pila.Push("ASIG");
                 pila.Push("DESDE");
+
+
+                arbolSintactico.agregarNodo("DESDE");
+                arbolSintactico.agregarNodo("ASIG");
+                arbolSintactico.agregarNodo("HASTA");
+                arbolSintactico.agregarNodo("LOGICA");
+                arbolSintactico.agregarNodo("INCREMENTO");
+                arbolSintactico.agregarNodo("ASIG_EP2");
+                arbolSintactico.agregarNodo("{");
+                arbolSintactico.agregarNodo("estado1");
+                arbolSintactico.agregarNodo("}");
             }
             else if (token.lexema.Equals("IMPRIMIR"))
             {
@@ -394,6 +426,12 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("EXP");
                 pila.Push("(");
                 pila.Push("IMPRIMIR");
+
+                arbolSintactico.agregarNodo("IMPRIMIR");
+                arbolSintactico.agregarNodo("(");
+                arbolSintactico.agregarNodo("EXP");
+                arbolSintactico.agregarNodo(")");
+                arbolSintactico.agregarNodo(";");
             }
             else if (token.lexema.Equals("LEER"))
             {
@@ -403,6 +441,13 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("ID_CADENA");
                 pila.Push("(");
                 pila.Push("LEER");
+
+
+                arbolSintactico.agregarNodo("LEER");
+                arbolSintactico.agregarNodo("(");
+                arbolSintactico.agregarNodo("ID_CADENA");
+                arbolSintactico.agregarNodo(")");
+                arbolSintactico.agregarNodo(";");
             }
             else
             {
@@ -414,12 +459,17 @@ namespace PROYECTO_LENGUAJES.Pila
         }
         private void EXP(ID_token token, Stack<String> pila)
         {
+            asignacionRaiz(pila);
             String lexTemp = token.lexema;
             if (lexTemp.Equals("CAD_TEXTO")|| lexTemp.Equals("ID_CADENA")|| lexTemp.Equals("NUMERO_E")|| lexTemp.Equals("ID_ENTERO")|| lexTemp.Equals("NUMERO_D")|| lexTemp.Equals("ID_DECIMAL"))
             {
                 pila.Pop();
                 pila.Push("EXP_P");
                 pila.Push(token.lexema);
+
+                arbolSintactico.agregarNodo(token.lexema);
+                arbolSintactico.agregarNodo("EXP_P");
+
             }
             else
             {
@@ -430,11 +480,15 @@ namespace PROYECTO_LENGUAJES.Pila
         }
         private void EXP_P(ID_token token, Stack<String> pila)
         {
+            asignacionRaiz(pila);
             if (token.lexema.Equals("+"))
             {
                 pila.Pop();
                 pila.Push("EXP");
                 pila.Push("+");
+
+                arbolSintactico.agregarNodo("+");
+                arbolSintactico.agregarNodo("EXP");
             }
             else
             {
@@ -443,6 +497,7 @@ namespace PROYECTO_LENGUAJES.Pila
         }
         private void ES_SI_2(ID_token token, Stack<String> pila)
         {
+            asignacionRaiz(pila);
             if (token.lexema.Equals("SINO"))
             {
                 pila.Pop();
@@ -450,11 +505,16 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("estado1");
                 pila.Push("{");
                 pila.Push("SINO");
+
+                arbolSintactico.agregarNodo("SINO");
+                arbolSintactico.agregarNodo("{");
+                arbolSintactico.agregarNodo("estado1");
+                arbolSintactico.agregarNodo("}");
             }
             else if (token.lexema.Equals("SINO_SI"))
             {
-                pila.Push("ES_SI_2");
                 pila.Pop();
+                pila.Push("ES_SI_2");
                 pila.Push("}");
                 pila.Push("estado1");
                 pila.Push("{");
@@ -462,6 +522,15 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("LOGICA");
                 pila.Push("(");
                 pila.Push("SINO_SI");
+
+                arbolSintactico.agregarNodo("SINO_SI");
+                arbolSintactico.agregarNodo("(");
+                arbolSintactico.agregarNodo("LOGICA");
+                arbolSintactico.agregarNodo(")");
+                arbolSintactico.agregarNodo("{");
+                arbolSintactico.agregarNodo("estado1");
+                arbolSintactico.agregarNodo("}");
+                arbolSintactico.agregarNodo("ES_SI_2");
             }
             else
             {
@@ -471,12 +540,17 @@ namespace PROYECTO_LENGUAJES.Pila
         }
         private void ASIG(ID_token token, Stack<String> pila)
         {
+            asignacionRaiz(pila);
             if (token.lexema.Equals("ID_ENTERO"))
             {
                 pila.Pop();
                 pila.Push("ASIG_EP2");
                 pila.Push("=");
                 pila.Push("ID_ENTERO");
+
+                arbolSintactico.agregarNodo("ID_ENTERO");
+                arbolSintactico.agregarNodo("=");
+                arbolSintactico.agregarNodo("ASIG_EP2");
             } 
             else if (token.lexema.Equals("ENTERO"))
             {
@@ -485,6 +559,11 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("=");
                 pila.Push("ID_ENTERO");
                 pila.Push("ENTERO");
+
+                arbolSintactico.agregarNodo("ENTERO");
+                arbolSintactico.agregarNodo("ID_ENTERO");
+                arbolSintactico.agregarNodo("=");
+                arbolSintactico.agregarNodo("ASIG_EP2");
             }
             else
             {
@@ -496,15 +575,20 @@ namespace PROYECTO_LENGUAJES.Pila
         }
         private void ASIG_P(ID_token token, Stack<String> pila)
         {
+            asignacionRaiz(pila);
             if (token.lexema.Equals("ID_ENTERO"))
             {
                 pila.Pop();
                 pila.Push("ID_ENTERO");
+
+                arbolSintactico.agregarNodo(token.lexema);
             }
             else if (token.lexema.Equals("NUMERO_E"))
             {
                 pila.Pop();
                 pila.Push("NUMERO_E");
+
+                arbolSintactico.agregarNodo(token.lexema);
             }
             else
             {
@@ -516,17 +600,24 @@ namespace PROYECTO_LENGUAJES.Pila
         }
         public void estado2(ID_token token, Stack<String> pila)
         {
+            asignacionRaiz(pila);
             if (token.lexema.Equals("ID_ENTERO"))
             {
                 pila.Pop();
                 pila.Push("ASIG_E");
                 pila.Push("ID_ENTERO");
+
+                arbolSintactico.agregarNodo("ID_ENTERO");
+                arbolSintactico.agregarNodo("ASIG_E");
             }
             else if (token.lexema.Equals("ID_DECIMAL"))
             {
                 pila.Pop();
                 pila.Push("ASIG_D");
                 pila.Push("ID_DECIMAL");
+
+                arbolSintactico.agregarNodo("ID_DECIMAL");
+                arbolSintactico.agregarNodo("ASIG_D");
 
             }
             else if (token.lexema.Equals("ID_CADENA"))
@@ -535,6 +626,9 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("ASIG_S");
                 pila.Push("ID_CADENA");
 
+                arbolSintactico.agregarNodo("ID_CADENA");
+                arbolSintactico.agregarNodo("ASIG_S");
+
             }
             else if (token.lexema.Equals("ID_BOOLEANO"))
             {
@@ -542,11 +636,18 @@ namespace PROYECTO_LENGUAJES.Pila
                 pila.Push("ASIG_B");
                 pila.Push("ID_BOOLEANO");
 
+                arbolSintactico.agregarNodo("ID_BOOLEANO");
+                arbolSintactico.agregarNodo("ASIG_B");
+
             }
             else if (token.lexema.Equals("ID_CARACTER"))
             {
+                pila.Pop();
                 pila.Push("ASIG_C");
                 pila.Push("ID_CARACTER");
+
+                arbolSintactico.agregarNodo("ID_CARACTER");
+                arbolSintactico.agregarNodo("ASIG_C");
             }
             else
             {

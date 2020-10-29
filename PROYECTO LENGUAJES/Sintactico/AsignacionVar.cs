@@ -38,6 +38,7 @@ namespace PROYECTO_LENGUAJES.Sintactico
                 pila.Pop();
                 pila.Push(";");
                 pila.Push("++");
+
                 arbolSintactico.agregarNodo("++");
                 arbolSintactico.agregarNodo(";");
             }
@@ -46,6 +47,7 @@ namespace PROYECTO_LENGUAJES.Sintactico
                 pila.Pop();
                 pila.Push(";");
                 pila.Push("--");
+
                 arbolSintactico.agregarNodo("--");
                 arbolSintactico.agregarNodo(";");
             }
