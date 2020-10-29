@@ -496,11 +496,10 @@ namespace PROYECTO_LENGUAJES.Pila
             }
         }
         private void ES_SI_2(ID_token token, Stack<String> pila)
-        {
-            //arbolSintactico.agregarNodo(pila.Peek());
-            asignacionRaiz(pila);
+        {   
             if (token.lexema.Equals("SINO"))
             {
+                asignacionRaiz(pila);
                 pila.Pop();
                 pila.Push("}");
                 pila.Push("estado1");
@@ -514,6 +513,7 @@ namespace PROYECTO_LENGUAJES.Pila
             }
             else if (token.lexema.Equals("SINO_SI"))
             {
+                asignacionRaiz(pila);
                 pila.Pop();
                 pila.Push("ES_SI_2");
                 pila.Push("}");
