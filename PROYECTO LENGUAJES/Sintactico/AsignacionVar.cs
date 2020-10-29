@@ -18,7 +18,6 @@ namespace PROYECTO_LENGUAJES.Sintactico
         }
         public void ASIG_E(ID_token token, Stack<String> pila, List<String> errores)
         {
-            arbolSintactico.agregarNodo(pila.Peek());
             asignacionRaiz(pila);
             
             if (token.lexema.Equals("="))
@@ -695,7 +694,6 @@ namespace PROYECTO_LENGUAJES.Sintactico
         private void asignacionRaiz(Stack<String> pila)
         {
             Nodo temp = arbolSintactico.retornarNodo(pila.Peek());
-            //Console.WriteLine("Busquedad de nodo: " + pila.Peek() + " resultado: "+temp.nombre);
             if (temp != null)
             {
                 arbolSintactico.raizTemporal = temp;

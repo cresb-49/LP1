@@ -27,6 +27,7 @@ namespace PROYECTO_LENGUAJES.Sintactico
 
                 arbolSintactico.agregarNodo("ESTADO_LOGICO");
                 arbolSintactico.agregarNodo("LOGICA2");
+
             }
             else if (token.lexema.Equals("NUMERO_E") || token.lexema.Equals("NUMERO_D") || token.lexema.Equals("ID_ENTERO") || token.lexema.Equals("ID_DECIMAL") || token.lexema.Equals("-"))
             {
@@ -40,6 +41,7 @@ namespace PROYECTO_LENGUAJES.Sintactico
                 arbolSintactico.agregarNodo("OP_RELACIONAL");
                 arbolSintactico.agregarNodo("NUM2");
                 arbolSintactico.agregarNodo("LOGICA2");
+
             }
             else if (token.contenido.Equals("!"))
             {
@@ -51,6 +53,7 @@ namespace PROYECTO_LENGUAJES.Sintactico
                 arbolSintactico.agregarNodo("!");
                 arbolSintactico.agregarNodo("LOGICA");
                 arbolSintactico.agregarNodo("LOGICA2");
+
             }
             else if (token.lexema.Equals("("))
             {
@@ -64,6 +67,7 @@ namespace PROYECTO_LENGUAJES.Sintactico
                 arbolSintactico.agregarNodo("LOGICA");
                 arbolSintactico.agregarNodo(")");
                 arbolSintactico.agregarNodo("LOGICA2");
+                
             }
             else
             {
@@ -75,9 +79,10 @@ namespace PROYECTO_LENGUAJES.Sintactico
         }
         public void LOGICA2(ID_token token, Stack<String> pila)
         {
-            asignacionRaiz(pila);
             if (token.lexema.Equals("&&"))
             {
+                asignacionRaiz(pila);
+
                 pila.Pop();
                 pila.Push("LOGICA");
                 pila.Push("&&");
@@ -88,6 +93,8 @@ namespace PROYECTO_LENGUAJES.Sintactico
             }
             else if (token.lexema.Equals("||"))
             {
+                asignacionRaiz(pila);
+
                 pila.Pop();
                 pila.Push("LOGICA");
                 pila.Push("||");
@@ -204,10 +211,15 @@ namespace PROYECTO_LENGUAJES.Sintactico
         private void asignacionRaiz(Stack<String> pila)
         {
             Nodo temp = arbolSintactico.retornarNodo(pila.Peek());
-            //Console.WriteLine("Busquedad de nodo: " + pila.Peek() + " resultado: "+temp.nombre);
             if (temp != null)
             {
                 arbolSintactico.raizTemporal = temp;
+            }
+            else
+            {
+                Console.WriteLine("No encontre el nodo pedido, escalare el arbol");
+                arbolSintactico.escalarArbol();
+                asignacionRaiz(pila);
             }
         }
     }
